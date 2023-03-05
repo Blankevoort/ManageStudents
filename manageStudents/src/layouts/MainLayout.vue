@@ -1,20 +1,65 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="bg-primary text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="/MainImages/Logo.png" />
-          </q-avatar>
-          شهیدان منا
-        </q-toolbar-title>
+      <div class="row justify-between">
+        <q-toolbar>
+          <q-btn
+            class="col-1"
+            dense
+            flat
+            round
+            icon="menu"
+            @click="ToggleLeftDrawer"
+          />
 
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
-      </q-toolbar>
+          <q-toolbar-title class="col-11 offset-6">
+            <span class="q-px-sm">شهیدان منا</span>
+            <q-avatar>
+              <img src="/MainImages/Logo.png" />
+            </q-avatar>
+          </q-toolbar-title>
+        </q-toolbar>
+      </div>
     </q-header>
 
-    <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile">
+    <q-drawer v-model="toggleLeftDrawer" side="left" behavior="mobile">
       <!-- drawer content -->
+      <q-scroll-area
+        style="
+          height: calc(100% - 150px);
+          margin-top: 150px;
+          border-right: 1px solid #ddd;
+        "
+      >
+        <q-list padding class="q-ml-md">
+          <q-item clickable>
+            <q-item-section>
+              <q-btn flat to="/" class="font-big">صفحه اصلی</q-btn>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable>
+            <q-item-section>
+              <q-btn flat to="/about" class="font-big">درباره ما</q-btn>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
+
+      <div class="text-center">
+        <q-img
+          class="absolute-top"
+          src="https://cdn.quasar.dev/img/material.png"
+          style="height: 150px"
+        >
+          <div class="absolute-bottom bg-transparent">
+            <q-avatar size="56px" class="q-mb-sm">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+            <div class="text-weight-bold">معین صداقتی</div>
+          </div>
+        </q-img>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -22,7 +67,30 @@
     </q-page-container>
 
     <q-footer class="bg-transparent">
-      <q-img src="/MainImages/Footer.png" />
+      <q-img src="/MainImages/Footer.png" class="position-relative">
+        <div class="bg-transparent row items-center q-mt-xl footer-margin">
+          <div class="col-6">
+            <q-list>
+              <q-item clickable>
+                <q-item-section>
+                  <q-btn flat to="/" class="font-small">صفحه اصلی</q-btn>
+                </q-item-section>
+              </q-item>
+
+              <q-item clickable>
+                <q-item-section>
+                  <q-btn flat to="/about" class="font-small">درباره ما</q-btn>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </div>
+
+          <div class="col-6">
+            این برنامه توسط دانش آموزان شهیدان منا و تنها برای استفاده ی مدیران
+            ساخته شده است.
+          </div>
+        </div>
+      </q-img>
     </q-footer>
   </q-layout>
 </template>
@@ -32,14 +100,73 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    const rightDrawerOpen = ref(false);
+    const toggleLeftDrawer = ref(false);
 
     return {
-      rightDrawerOpen,
-      toggleRightDrawer() {
-        rightDrawerOpen.value = !rightDrawerOpen.value;
+      toggleLeftDrawer,
+      ToggleLeftDrawer() {
+        toggleLeftDrawer.value = !toggleLeftDrawer.value;
       },
     };
   },
 };
 </script>
+
+// in style ha tanha be in file ha dade mishavand
+
+<style scoped>
+.font-big {
+  font-size: 16px;
+}
+.font-small {
+  font-size: 11px;
+}
+
+.footer-margin {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 50px;
+}
+
+.q-item {
+  padding: 0 !important;
+  min-width: none !important;
+}
+
+#q-app
+  > div
+  > footer
+  > div
+  > div.q-img__content.absolute-full.q-anchor--skip
+  > div
+  > div:nth-child(1)
+  > div
+  > div:nth-child(1)
+  > div.q-item__section.column.q-item__section--main.justify-center
+  > a {
+  padding: 0 !important;
+}
+
+#q-app
+  > div
+  > footer
+  > div
+  > div.q-img__content.absolute-full.q-anchor--skip
+  > div
+  > div:nth-child(1)
+  > div
+  > div:nth-child(2)
+  > div.q-item__section.column.q-item__section--main.justify-center
+  > a {
+  padding: 0 !important;
+}
+
+#q-app
+  > div
+  > footer
+  > div
+  > div.q-img__content.absolute-full.q-anchor--skip
+  > div {
+  padding: 0 !important;
+}
+</style>

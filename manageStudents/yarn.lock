@@ -5224,6 +5224,13 @@ postcss-rtlcss@4.0.1:
   dependencies:
     rtlcss "4.0.0"
 
+postcss-rtlcss@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/postcss-rtlcss/-/postcss-rtlcss-4.0.3.tgz#3cd0ed588afecd124bf7b8f2efdf003380f8b551"
+  integrity sha512-ZbF16XJnp0NljUC6s1BJXrqTcz4Bkl06CuABW5gaQNa8lW83XSH2hcFQOC/zop8Qje8U3RccIzktRLO5puM4Gw==
+  dependencies:
+    rtlcss "4.0.0"
+
 postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.5, postcss-selector-parser@^6.0.9:
   version "6.0.11"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.11.tgz#2e41dc39b7ad74046e1615185185cd0b17d0c8dc"
