@@ -12,7 +12,7 @@
             @click="ToggleLeftDrawer"
           />
 
-          <q-toolbar-title class="col-11 offset-6">
+          <q-toolbar-title class="col-5 offset-6">
             <span class="q-px-sm">شهیدان منا</span>
             <q-avatar>
               <img src="/MainImages/Logo.png" />
@@ -67,7 +67,7 @@
     </q-page-container>
 
     <q-footer class="bg-transparent">
-      <q-img src="/MainImages/Footer.png" class="position-relative">
+      <q-img src="/MainImages/Footer.png" class="position-relative footer-img">
         <div class="bg-transparent row items-center q-mt-xl footer-margin">
           <div class="col-6">
             <q-list>
@@ -112,61 +112,16 @@ export default {
 };
 </script>
 
-// in style ha tanha be in file ha dade mishavand
+<!-- in style ha tanha be in file ha dade mishavand -->
 
 <style scoped>
-.font-big {
-  font-size: 16px;
-}
-.font-small {
-  font-size: 11px;
+.footer-img {
+  height: 166px!important;
 }
 
 .footer-margin {
   margin-left: 20px;
   margin-right: 20px;
-  margin-top: 50px;
-}
-
-.q-item {
-  padding: 0 !important;
-  min-width: none !important;
-}
-
-#q-app
-  > div
-  > footer
-  > div
-  > div.q-img__content.absolute-full.q-anchor--skip
-  > div
-  > div:nth-child(1)
-  > div
-  > div:nth-child(1)
-  > div.q-item__section.column.q-item__section--main.justify-center
-  > a {
-  padding: 0 !important;
-}
-
-#q-app
-  > div
-  > footer
-  > div
-  > div.q-img__content.absolute-full.q-anchor--skip
-  > div
-  > div:nth-child(1)
-  > div
-  > div:nth-child(2)
-  > div.q-item__section.column.q-item__section--main.justify-center
-  > a {
-  padding: 0 !important;
-}
-
-#q-app
-  > div
-  > footer
-  > div
-  > div.q-img__content.absolute-full.q-anchor--skip
-  > div {
-  padding: 0 !important;
+  margin-top: 40px;
 }
 </style>
