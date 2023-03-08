@@ -10,6 +10,8 @@ export default defineComponent({
 });
 </script>
 
+<!-- in style ha dar kole application ghabele dastresi hastand -->
+
 <style>
 .font-big {
   font-size: 16px;

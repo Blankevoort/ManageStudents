@@ -14,7 +14,9 @@
               <q-item-label lines="1">
                 <span class="text-weight-medium">کلاس 902</span>
               </q-item-label>
-              <q-item-label caption lines="1"> 30 دانش آموز </q-item-label>
+              <q-item-label caption class="text-grey" lines="1">
+                30 دانش آموز
+              </q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -34,7 +36,9 @@
               <q-item-label lines="1">
                 <span class="text-weight-medium">کلاس 902</span>
               </q-item-label>
-              <q-item-label caption lines="1"> 30 دانش آموز </q-item-label>
+              <q-item-label caption class="text-grey" lines="1">
+                30 دانش آموز
+              </q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -54,7 +58,9 @@
               <q-item-label lines="1">
                 <span class="text-weight-medium">کلاس 902</span>
               </q-item-label>
-              <q-item-label caption lines="1"> 30 دانش آموز </q-item-label>
+              <q-item-label caption class="text-grey" lines="1">
+                30 دانش آموز
+              </q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -74,7 +80,9 @@
               <q-item-label lines="1">
                 <span class="text-weight-medium">کلاس 902</span>
               </q-item-label>
-              <q-item-label caption lines="1"> 30 دانش آموز </q-item-label>
+              <q-item-label caption class="text-grey" lines="1">
+                30 دانش آموز
+              </q-item-label>
             </q-item-section>
 
             <q-item-section side>

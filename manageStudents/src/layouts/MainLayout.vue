@@ -112,7 +112,7 @@ export default {
 };
 </script>
 
-<!-- in style ha tanha be in file ha dade mishavand -->
+<!-- in style ha tanha dar in file ghabele dastresi mibashand -->
 
 <style scoped>
 .footer-img {
