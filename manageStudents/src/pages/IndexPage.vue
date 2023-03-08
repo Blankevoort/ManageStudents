@@ -11,6 +11,8 @@
           @click="addClass = true"
         />
 
+        <!-- pop up baraye afzodane class ha ast -->
+
         <q-dialog v-model="addClass">
           <div class="row">
             <q-card
@@ -57,7 +59,7 @@
           </div>
         </q-dialog>
 
-        <!-- pop up baraye taghir dar class ha -->
+        <!-- pop up baraye taghir dar class ha ast -->
 
         <q-dialog v-model="edit">
           <div class="row">
@@ -100,7 +102,7 @@
           </div>
         </q-dialog>
 
-        <!-- in div baraye card ha ast -->
+        <!-- in div baraye card class ha ast -->
 
         <div class="my-default bg-secondary q-px-md text-white">
           <q-list style="max-width: 388px">
@@ -322,6 +324,8 @@ export default {
     // function checkLoggin() {
     //   if(){
 
+    //   } else {
+
     //   }
     // }
 
@@ -351,5 +355,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
