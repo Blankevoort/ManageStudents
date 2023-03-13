@@ -12,7 +12,7 @@
             @click="ToggleLeftDrawer"
           />
 
-          <q-toolbar-title class="col-5 offset-6">
+          <q-toolbar-title class="col-6 offset-5">
             <span class="q-px-sm">شهیدان منا</span>
             <q-avatar>
               <img src="/MainImages/Logo.png" />
@@ -56,7 +56,7 @@
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
-            <div class="text-weight-bold">معین صداقتی</div>
+            <div class="text-weight-bold">{{ user.username }}</div>
           </div>
         </q-img>
       </div>
@@ -96,13 +96,43 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onBeforeMount } from "vue";
+import { api } from "src/boot/axios";
+
+import { useQuasar, Cookies } from "quasar";
 
 export default {
   setup() {
+    const $q = useQuasar();
     const toggleLeftDrawer = ref(false);
 
+    const user = ref([]);
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
+    function logout() {
+      api
+        .post("auth/token/logout/")
+        .then($q.cookies.remove("token"))
+        .then(location.reload());
+    }
+
+    onBeforeMount(() => {
+      getUser();
+    });
+
     return {
+      user,
       toggleLeftDrawer,
       ToggleLeftDrawer() {
         toggleLeftDrawer.value = !toggleLeftDrawer.value;
@@ -116,7 +146,7 @@ export default {
 
 <style scoped>
 .footer-img {
-  height: 166px!important;
+  height: 166px !important;
 }
 
 .footer-margin {

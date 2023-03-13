@@ -260,9 +260,9 @@
                   square
                   filled
                   clearable
-                  v-model="email"
-                  type="email"
-                  label="email"
+                  v-model="username"
+                  type="text"
+                  label="username"
                 />
                 <q-input
                   square
@@ -281,7 +281,7 @@
                 size="lg"
                 class="full-width"
                 label="Login"
-                @click="loggedIn = true"
+                @click="Login()"
               />
             </q-card-actions>
           </q-card>
@@ -296,19 +296,21 @@ import { ref, onMounted } from "vue";
 import { api } from "src/boot/axios";
 
 import { useRouter } from "vue-router";
-import { useQuasar } from "quasar";
+import { useQuasar, Cookies } from "quasar";
 
 export default {
   setup() {
     const $q = useQuasar();
 
     const loggedIn = ref(false);
-    const email = ref();
+    const username = ref();
     const password = ref();
     const edit = ref(false);
     const Students = ref(30);
     const addClass = ref(false);
     const className = ref();
+
+    const user = ref([]);
 
     function confirm() {
       $q.dialog({
@@ -321,28 +323,45 @@ export default {
       });
     }
 
-    // function checkLoggin() {
-    //   if(){
-
-    //   } else {
-
-    //   }
-    // }
-
     // function RemoveClass() {
 
     // }
 
-    // function SendNew() {
+    function Login() {
+      api
+        .post("auth/token/login/", {
+          username: username.value,
+          password: password.value,
+        })
+        .then((r) => {
+          if (r.data.auth_token) {
+            $q.cookies.set("token", r.data.auth_token);
+            loggedIn.value = false;
+            location.reload();
+          }
+        });
+    }
 
-    // }
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+          loggedIn.value = true;
+        });
+    }
 
-    // onMounted(() => {
-    //   checkLoggin()
-    // })
+    onMounted(() => {
+      getUser();
+    });
 
     return {
-      email,
+      username,
+      user,
       password,
       loggedIn,
       confirm,
@@ -350,7 +369,8 @@ export default {
       edit,
       Students,
       className,
-      // checkLoggin,
+      getUser,
+      Login,
     };
   },
 };
