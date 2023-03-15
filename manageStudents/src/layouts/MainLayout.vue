@@ -43,6 +43,12 @@
               <q-btn flat to="/about" class="font-big">درباره ما</q-btn>
             </q-item-section>
           </q-item>
+
+          <q-item clickable>
+            <q-item-section>
+              <q-btn flat @click="logout()" icon="logout" push />
+            </q-item-section>
+          </q-item>
         </q-list>
       </q-scroll-area>
 
@@ -133,6 +139,7 @@ export default {
 
     return {
       user,
+      logout,
       toggleLeftDrawer,
       ToggleLeftDrawer() {
         toggleLeftDrawer.value = !toggleLeftDrawer.value;

@@ -18,7 +18,7 @@
             <q-card
               square
               class="shadow-24"
-              style="width: 300px; height: 385px"
+              style="width: 300px; height: 325px"
             >
               <q-card-section class="bg-primary">
                 <h4 class="text-h5 text-white q-my-md">افزودن کلاس</h4>
@@ -29,18 +29,14 @@
               </q-card-section>
               <q-card-section>
                 <q-form class="q-px-sm q-pt-xl">
-                  <q-input square clearable v-model="className" label="نام">
-                    <template v-slot:prepend>
-                      <q-icon name="badge" />
-                    </template>
-                  </q-input>
                   <q-input
-                    v-model.number="Students"
-                    type="number"
-                    style="max-width: 300px"
+                    square
+                    clearable
+                    v-model.number="classId"
+                    label="نام"
                   >
                     <template v-slot:prepend>
-                      <q-icon name="group" />
+                      <q-icon name="badge" />
                     </template>
                   </q-input>
                 </q-form>
@@ -52,67 +48,68 @@
                   color="purple-4"
                   class="full-width text-white"
                   label="افزودن"
-                  @click="SendNew()"
+                  @click="AddNewClass()"
                 />
               </q-card-actions>
             </q-card>
           </div>
         </q-dialog>
+      </div>
 
-        <!-- pop up baraye taghir dar class ha ast -->
+      <!-- pop up baraye taghir dar class ha ast -->
 
-        <q-dialog v-model="edit">
-          <div class="row">
-            <q-card
-              square
-              class="shadow-24"
-              style="width: 300px; height: 300px"
-            >
-              <q-card-section class="bg-primary">
-                <h4 class="text-h5 text-white q-my-md">تغییر در کلاس</h4>
-                <div
-                  class="absolute-bottom-right q-pr-md"
-                  style="transform: translateY(50%)"
-                ></div>
-              </q-card-section>
-              <q-card-section>
-                <q-form class="q-px-sm q-pt-md">
-                  <q-input
-                    v-model.number="Students"
-                    type="number"
-                    style="max-width: 300px"
+      <q-dialog v-model="edit">
+        <div class="row">
+          <q-card square class="shadow-24" style="width: 300px; height: 325px">
+            <q-card-section class="bg-primary">
+              <h4 class="text-h5 text-white q-my-md">تغییر در کلاس</h4>
+              <div
+                class="absolute-bottom-right q-pr-md"
+                style="transform: translateY(50%)"
+              ></div>
+            </q-card-section>
+            <q-card-section>
+              <q-form class="q-px-sm q-pt-xl">
+                <q-input square clearable v-model.number="classId" label="نام">
+                  <template v-slot:prepend>
+                    <q-icon name="badge" />
+                  </template>
+                </q-input>
+              </q-form>
+            </q-card-section>
+            <q-card-actions class="q-px-lg">
+              <q-btn
+                unelevated
+                size="lg"
+                color="purple-4"
+                class="full-width text-white"
+                label="تغییر"
+                @click="EditClass()"
+              />
+            </q-card-actions>
+          </q-card>
+        </div>
+      </q-dialog>
+
+      <!-- in div baraye card class ha ast -->
+
+      <div class="mx-default">
+        <div
+          class="my-default bg-secondary q-px-md text-white"
+          v-for="classInfo in Classes"
+          :key="classInfo.id"
+        >
+          <q-list style="max-width: 388px">
+            <q-item class="q-py-md">
+              <q-item-section @click="setCurrent(classInfo)">
+                <q-item-label lines="1">
+                  <span class="text-weight-medium"
+                    >کلاس <span>{{ classInfo.class_id }}</span></span
                   >
-                    <template v-slot:prepend>
-                      <q-icon name="group" />
-                    </template>
-                  </q-input>
-                </q-form>
-              </q-card-section>
-              <q-card-actions class="q-px-lg">
-                <q-btn
-                  unelevated
-                  size="lg"
-                  color="purple-4"
-                  class="full-width text-white"
-                  label="ثبت تغییرات"
-                  @click="SendNew()"
-                />
-              </q-card-actions>
-            </q-card>
-          </div>
-        </q-dialog>
-
-        <!-- in div baraye card class ha ast -->
-
-        <div class="my-default bg-secondary q-px-md text-white">
-          <q-list style="max-width: 388px">
-            <q-item class="q-py-md">
-              <q-item-section>
-                <q-item-label lines="1">
-                  <span class="text-weight-medium">کلاس 902</span>
                 </q-item-label>
+
                 <q-item-label caption class="text-grey" lines="1">
-                  30 دانش آموز
+                  {{ classInfo.students_count }} دانش آموز
                 </q-item-label>
               </q-item-section>
 
@@ -123,116 +120,14 @@
                     dense
                     round
                     icon="delete"
-                    @click="confirm()"
+                    @click="confirm(), setCurrentRemove(classInfo.class_id)"
                   ></q-btn>
                   <q-btn
                     flat
                     dense
                     round
                     icon="edit"
-                    @click="edit = true"
-                  ></q-btn>
-                </div>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-
-        <div class="my-default bg-secondary q-px-md text-white">
-          <q-list style="max-width: 388px">
-            <q-item class="q-py-md">
-              <q-item-section>
-                <q-item-label lines="1">
-                  <span class="text-weight-medium">کلاس 902</span>
-                </q-item-label>
-                <q-item-label caption class="text-grey" lines="1">
-                  30 دانش آموز
-                </q-item-label>
-              </q-item-section>
-
-              <q-item-section side>
-                <div class="q-gutter-xs text-white">
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="delete"
-                    @click="confirm()"
-                  ></q-btn>
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="edit"
-                    @click="edit = true"
-                  ></q-btn>
-                </div>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-
-        <div class="my-default bg-secondary q-px-md text-white">
-          <q-list style="max-width: 388px">
-            <q-item class="q-py-md">
-              <q-item-section>
-                <q-item-label lines="1">
-                  <span class="text-weight-medium">کلاس 902</span>
-                </q-item-label>
-                <q-item-label caption class="text-grey" lines="1">
-                  30 دانش آموز
-                </q-item-label>
-              </q-item-section>
-
-              <q-item-section side>
-                <div class="q-gutter-xs text-white">
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="delete"
-                    @click="confirm()"
-                  ></q-btn>
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="edit"
-                    @click="edit = true"
-                  ></q-btn>
-                </div>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-
-        <div class="my-default bg-secondary q-px-md text-white">
-          <q-list style="max-width: 388px">
-            <q-item class="q-py-md">
-              <q-item-section>
-                <q-item-label lines="1">
-                  <span class="text-weight-medium">کلاس 902</span>
-                </q-item-label>
-                <q-item-label caption class="text-grey" lines="1">
-                  30 دانش آموز
-                </q-item-label>
-              </q-item-section>
-
-              <q-item-section side>
-                <div class="q-gutter-xs text-white">
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="delete"
-                    @click="confirm()"
-                  ></q-btn>
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="edit"
-                    @click="edit = true"
+                    @click="edit = true, setCurrentRemove(classInfo.class_id)"
                   ></q-btn>
                 </div>
               </q-item-section>
@@ -242,7 +137,7 @@
       </div>
     </div>
 
-    <!-- safeie login baraye modiran va moaven ha -->
+    <!-- safeie login baraye modiran -->
 
     <div
       class="bg-accent window-height window-width row justify-center items-center"
@@ -292,25 +187,41 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
+import { removeClass } from "src/stores/currentID";
+import { currentClassID } from "src/stores/classID";
+import { storeToRefs } from "pinia";
+
 export default {
   setup() {
     const $q = useQuasar();
+    const Classes = ref();
+    const user = ref([]);
+
+    const store = currentClassID();
+    const current = computed(() => store.current);
+    const setCurrent = (data) => store.setCurrent(data);
+    const showCurrent = computed(() => store.showCurrent);
+    const storeClassID = currentClassID();
+
+    const storeRemove = removeClass();
+    const remove = computed(() => storeRemove.remove);
+    const setCurrentRemove = (data) => storeRemove.setCurrentRemove(data);
+    const showCurrentRemove = computed(() => storeRemove.showCurrent);
+    const storeRemoveID = removeClass();
 
     const loggedIn = ref(false);
     const username = ref();
     const password = ref();
     const edit = ref(false);
-    const Students = ref(30);
     const addClass = ref(false);
-    const className = ref();
 
-    const user = ref([]);
+    const classId = ref();
 
     function confirm() {
       $q.dialog({
@@ -323,9 +234,46 @@ export default {
       });
     }
 
-    // function RemoveClass() {
+    function AddNewClass() {
+      var id = {
+        class_id: classId.value,
+      };
+      api
+        .post("classes/", id, {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          addClass.value = false;
+          location.reload();
+        });
+    }
 
-    // }
+    function EditClass() {
+      var editID = {
+        class_id: classId.value,
+      };
+      var editId = {
+        class_id: remove.value,
+      };
+      api.put("classes/" + { editId } + "/", editID, {
+        headers: {
+          Authorization: "Token " + $q.cookies.get("token"),
+        },
+      });
+    }
+
+    function RemoveClass() {
+      var classid = {
+        class_id: remove.value,
+      };
+      api.delete("classes/" + { classid } + "/", {
+        headers: {
+          Authorization: "Token " + $q.cookies.get("token"),
+        },
+      });
+    }
 
     function Login() {
       api
@@ -355,22 +303,40 @@ export default {
         });
     }
 
-    onMounted(() => {
+    function getClasses() {
+      api
+        .get("classes/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          Classes.value = r.data;
+        });
+    }
+
+    onBeforeMount(() => {
       getUser();
+      getClasses();
     });
 
     return {
+      EditClass,
+      classId,
       username,
       user,
       password,
       loggedIn,
       confirm,
-      addClass,
       edit,
-      Students,
-      className,
+      Classes,
       getUser,
+      addClass,
+      AddNewClass,
+      RemoveClass,
       Login,
+      setCurrent,
+      setCurrentRemove,
     };
   },
 };
