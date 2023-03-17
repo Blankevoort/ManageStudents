@@ -44,7 +44,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item clickable>
+          <q-item v-if="loggedin" clickable>
             <q-item-section>
               <q-btn flat @click="logout()" icon="logout" push />
             </q-item-section>
@@ -113,6 +113,7 @@ export default {
     const toggleLeftDrawer = ref(false);
 
     const user = ref([]);
+    const loggedin = ref(false)
 
     function getUser() {
       api
@@ -123,6 +124,7 @@ export default {
         })
         .then((r) => {
           user.value = r.data;
+          loggedin.value = true
         });
     }
 
@@ -139,6 +141,7 @@ export default {
 
     return {
       user,
+      loggedin,
       logout,
       toggleLeftDrawer,
       ToggleLeftDrawer() {
