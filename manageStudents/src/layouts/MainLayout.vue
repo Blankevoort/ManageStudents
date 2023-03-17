@@ -15,7 +15,7 @@
           <q-toolbar-title class="col-6 offset-5">
             <span class="q-px-sm">شهیدان منا</span>
             <q-avatar>
-              <img src="/MainImages/Logo.png" />
+              <img src="/MainImages/logo.png" />
             </q-avatar>
           </q-toolbar-title>
         </q-toolbar>
