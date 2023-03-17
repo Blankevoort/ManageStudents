@@ -99,7 +99,7 @@
     <!-- safeie login baraye modiran -->
 
     <div
-      class="bg-accent window-height window-width row justify-center items-center"
+      class="window-height window-width row justify-center items-center"
       v-else
     >
       <div class="column">
