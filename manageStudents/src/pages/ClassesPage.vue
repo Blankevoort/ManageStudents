@@ -14,7 +14,7 @@
 
       <q-dialog v-model="addStudent">
         <div class="row">
-          <q-card square class="shadow-24" style="width: 300px; height: 385px">
+          <q-card square class="shadow-24" style="width: 300px; height: 435px">
             <q-card-section class="bg-primary">
               <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
               <div
@@ -24,13 +24,30 @@
             </q-card-section>
             <q-card-section>
               <q-form class="q-px-sm q-pt-xl">
-                <q-input square clearable v-model="Name" label="نام">
+                <q-input
+                  square
+                  clearable
+                  v-model="first_name"
+                  label="نام"
+                  autofocus
+                >
                   <template v-slot:prepend>
                     <q-icon name="person" />
                   </template>
                 </q-input>
                 <q-input
-                  v-model.number="Number"
+                  square
+                  clearable
+                  v-model="last_name"
+                  label="نام خانوادگی"
+                  autofocus
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="person" />
+                  </template>
+                </q-input>
+                <q-input
+                  v-model="number"
                   type="number"
                   style="max-width: 300px"
                 >
@@ -47,64 +64,18 @@
                 color="purple-4"
                 class="full-width text-white"
                 label="افزودن"
-                @click="SendNew()"
+                @click="AddNewStudent()"
               />
             </q-card-actions>
           </q-card>
         </div>
       </q-dialog>
 
-      <!-- pop up baraye taghir dar class ha -->
-
-      <q-dialog v-model="edit">
-        <div class="row">
-          <q-card square class="shadow-24" style="width: 300px; height: 350px">
-            <q-card-section class="bg-primary">
-              <h4 class="text-h5 text-white q-my-md">تغییر در دانش آموز</h4>
-              <div
-                class="absolute-bottom-right q-pr-md"
-                style="transform: translateY(50%)"
-              ></div>
-            </q-card-section>
-            <q-card-section>
-              <q-form class="q-px-sm q-pt-md">
-                <q-input
-                  v-model.number="currentName"
-                  type="number"
-                  style="max-width: 300px"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="person" />
-                  </template>
-                </q-input>
-                <q-input
-                  v-model.number="currentNumber"
-                  type="number"
-                  style="max-width: 300px"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="call" />
-                  </template>
-                </q-input>
-              </q-form>
-            </q-card-section>
-            <q-card-actions class="q-px-lg">
-              <q-btn
-                unelevated
-                size="lg"
-                color="purple-4"
-                class="full-width text-white"
-                label="ثبت تغییرات"
-                @click="SendNew()"
-              />
-            </q-card-actions>
-          </q-card>
-        </div>
-      </q-dialog>
-
-      <!-- in div baraye card ha ast -->
-
-      <div class="my-default bg-secondary q-px-md text-white">
+      <div
+        class="my-default bg-secondary q-px-md text-white"
+        v-for="(student, index) in Students"
+        :key="'student-' + index + 1"
+      >
         <q-list class="q-py-md" style="max-width: 388px">
           <q-item class="q-py-md">
             <q-item-section avatar>
@@ -115,10 +86,10 @@
 
             <q-item-section>
               <q-item-label lines="1">
-                <span class="text-weight-medium">معین صداقتی</span>
+                <span class="text-weight-medium">{{ student.full_name }}</span>
               </q-item-label>
               <q-item-label caption class="text-grey" lines="1"
-                >شماره تلفن: 09379608155</q-item-label
+                >شماره تلفن: {{ student.number }}</q-item-label
               >
             </q-item-section>
 
@@ -128,135 +99,8 @@
                   flat
                   dense
                   round
-                  @click="confirm()"
                   icon="delete"
-                ></q-btn>
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="edit = true"
-                  icon="edit"
-                ></q-btn>
-              </div>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div>
-
-      <div class="my-default bg-secondary q-px-md text-white">
-        <q-list class="q-py-md" style="max-width: 388px">
-          <q-item class="q-py-md">
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label lines="1">
-                <span class="text-weight-medium">معین صداقتی</span>
-              </q-item-label>
-              <q-item-label caption class="text-grey" lines="1"
-                >شماره تلفن: 09379608155</q-item-label
-              >
-            </q-item-section>
-
-            <q-item-section side>
-              <div class="q-gutter-xs text-white">
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="confirm()"
-                  icon="delete"
-                ></q-btn>
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="edit = true"
-                  icon="edit"
-                ></q-btn>
-              </div>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div>
-
-      <div class="my-default bg-secondary q-px-md text-white">
-        <q-list class="q-py-md" style="max-width: 388px">
-          <q-item class="q-py-md">
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label lines="1">
-                <span class="text-weight-medium">معین صداقتی</span>
-              </q-item-label>
-              <q-item-label caption class="text-grey" lines="1"
-                >شماره تلفن: 09379608155</q-item-label
-              >
-            </q-item-section>
-
-            <q-item-section side>
-              <div class="q-gutter-xs text-white">
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="confirm()"
-                  icon="delete"
-                ></q-btn>
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="edit = true"
-                  icon="edit"
-                ></q-btn>
-              </div>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </div>
-
-      <div class="my-default bg-secondary q-px-md text-white">
-        <q-list class="q-py-md" style="max-width: 388px">
-          <q-item class="q-py-md">
-            <q-item-section avatar>
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-              </q-avatar>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label lines="1">
-                <span class="text-weight-medium">معین صداقتی</span>
-              </q-item-label>
-              <q-item-label caption class="text-grey" lines="1"
-                >شماره تلفن: 09379608155</q-item-label
-              >
-            </q-item-section>
-
-            <q-item-section side>
-              <div class="q-gutter-xs text-white">
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="confirm()"
-                  icon="delete"
-                ></q-btn>
-                <q-btn
-                  flat
-                  dense
-                  round
-                  @click="edit = true"
-                  icon="edit"
+                  @click="RemoveStudent(index)"
                 ></q-btn>
               </div>
             </q-item-section>
@@ -268,56 +112,104 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
-import { useRouter } from "vue-router";
-import { useQuasar } from "quasar";
+import { useQuasar, Cookies } from "quasar";
+
+import { currentClassID } from "src/stores/classID";
+import { storeToRefs } from "pinia";
 
 export default {
   setup() {
     const $q = useQuasar();
+    const Students = ref();
+    const user = ref([]);
 
-    const Name = ref();
-    const Number = ref();
-    const edit = ref(false);
-    const currentName = ref();
-    const currentNumber = ref(1);
+    const fullname = ref();
+    const number = ref();
+    const first_name = ref();
+    const last_name = ref();
+
+    const store = currentClassID();
+    const current = computed(() => store.current);
+
+    const loggedIn = ref(false);
     const addStudent = ref(false);
-    const studentName = ref();
 
-    function confirm() {
-      $q.dialog({
-        title: "تایید",
-        message: "آیا مطمعن هستید که می خواهید این دانش آموز را حذف کنید؟",
-        cancel: true,
-        persistent: false,
-      }).onOk(() => {
-        RemoveStudent();
-      });
+    function AddNewStudent() {
+      var data = {
+        first_name: first_name.value,
+        last_name: last_name.value,
+        number: number.value,
+        class_room: current.value.class_id,
+      };
+      api
+        .post("students/", data, {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          addStudent.value = false;
+        });
     }
 
-    // function RemoveStudent() {
+    function RemoveStudent(index) {
+      api
+        .delete("students/" + Students.value[index].id + "/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          location.reload();
+        });
+    }
 
-    // }
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+          loggedIn.value = true;
+        });
+    }
 
-    // function SendNew() {
+    function getStudents() {
+      api
+        .get("classes/" + current.value.class_id + "/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          Students.value = r.data.students;
+        });
+    }
 
-    // }
-
-    // onMounted(() => {
-
-    // })
+    onBeforeMount(() => {
+      getUser();
+      getStudents();
+    });
 
     return {
-      Name,
-      Number,
+      user,
       confirm,
+      Students,
+      getUser,
       addStudent,
-      edit,
-      currentName,
-      currentNumber,
-      studentName,
+      AddNewStudent,
+      RemoveStudent,
+      current,
+      fullname,
+      number,
+      first_name,
+      last_name,
     };
   },
 };

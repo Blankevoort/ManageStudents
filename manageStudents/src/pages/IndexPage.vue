@@ -34,6 +34,7 @@
                     clearable
                     v-model.number="classId"
                     label="نام"
+                    autofocus
                   >
                     <template v-slot:prepend>
                       <q-icon name="badge" />
@@ -56,48 +57,13 @@
         </q-dialog>
       </div>
 
-      <!-- pop up baraye taghir dar class ha ast -->
-
-      <q-dialog v-model="edit">
-        <div class="row">
-          <q-card square class="shadow-24" style="width: 300px; height: 325px">
-            <q-card-section class="bg-primary">
-              <h4 class="text-h5 text-white q-my-md">تغییر در کلاس</h4>
-              <div
-                class="absolute-bottom-right q-pr-md"
-                style="transform: translateY(50%)"
-              ></div>
-            </q-card-section>
-            <q-card-section>
-              <q-form class="q-px-sm q-pt-xl">
-                <q-input square clearable v-model.number="classId" label="نام">
-                  <template v-slot:prepend>
-                    <q-icon name="badge" />
-                  </template>
-                </q-input>
-              </q-form>
-            </q-card-section>
-            <q-card-actions class="q-px-lg">
-              <q-btn
-                unelevated
-                size="lg"
-                color="purple-4"
-                class="full-width text-white"
-                label="تغییر"
-                @click="EditClass()"
-              />
-            </q-card-actions>
-          </q-card>
-        </div>
-      </q-dialog>
-
       <!-- in div baraye card class ha ast -->
 
       <div class="mx-default">
         <div
           class="my-default bg-secondary q-px-md text-white"
-          v-for="classInfo in Classes"
-          :key="classInfo.id"
+          v-for="(classInfo, index) in Classes"
+          :key="'classInfo-' + index + 1"
         >
           <q-list style="max-width: 388px">
             <q-item class="q-py-md">
@@ -120,14 +86,7 @@
                     dense
                     round
                     icon="delete"
-                    @click="confirm(), setCurrentRemove(classInfo.class_id)"
-                  ></q-btn>
-                  <q-btn
-                    flat
-                    dense
-                    round
-                    icon="edit"
-                    @click="edit = true, setCurrentRemove(classInfo.class_id)"
+                    @click="RemoveClass(index)"
                   ></q-btn>
                 </div>
               </q-item-section>
@@ -193,7 +152,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
-import { removeClass } from "src/stores/currentID";
 import { currentClassID } from "src/stores/classID";
 import { storeToRefs } from "pinia";
 
@@ -209,30 +167,12 @@ export default {
     const showCurrent = computed(() => store.showCurrent);
     const storeClassID = currentClassID();
 
-    const storeRemove = removeClass();
-    const remove = computed(() => storeRemove.remove);
-    const setCurrentRemove = (data) => storeRemove.setCurrentRemove(data);
-    const showCurrentRemove = computed(() => storeRemove.showCurrent);
-    const storeRemoveID = removeClass();
-
     const loggedIn = ref(false);
     const username = ref();
     const password = ref();
-    const edit = ref(false);
     const addClass = ref(false);
 
     const classId = ref();
-
-    function confirm() {
-      $q.dialog({
-        title: "تایید",
-        message: "آیا مطمعن هستید که می خواهید این کلاس را حذف کنید؟",
-        cancel: true,
-        persistent: false,
-      }).onOk(() => {
-        RemoveClass();
-      });
-    }
 
     function AddNewClass() {
       var id = {
@@ -250,29 +190,16 @@ export default {
         });
     }
 
-    function EditClass() {
-      var editID = {
-        class_id: classId.value,
-      };
-      var editId = {
-        class_id: remove.value,
-      };
-      api.put("classes/" + { editId } + "/", editID, {
-        headers: {
-          Authorization: "Token " + $q.cookies.get("token"),
-        },
-      });
-    }
-
-    function RemoveClass() {
-      var classid = {
-        class_id: remove.value,
-      };
-      api.delete("classes/" + { classid } + "/", {
-        headers: {
-          Authorization: "Token " + $q.cookies.get("token"),
-        },
-      });
+    function RemoveClass(index) {
+      api
+        .delete("classes/" + Classes.value[index].class_id + "/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          location.reload();
+        });
     }
 
     function Login() {
@@ -321,14 +248,12 @@ export default {
     });
 
     return {
-      EditClass,
       classId,
       username,
       user,
       password,
       loggedIn,
       confirm,
-      edit,
       Classes,
       getUser,
       addClass,
@@ -336,7 +261,6 @@ export default {
       RemoveClass,
       Login,
       setCurrent,
-      setCurrentRemove,
     };
   },
 };
