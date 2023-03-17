@@ -72,7 +72,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer class="bg-transparent">
+    <q-footer reveal class="bg-transparent">
       <q-img src="/MainImages/Footer.png" class="position-relative footer-img">
         <div class="bg-transparent row items-center q-mt-xl footer-margin">
           <div class="col-6">
@@ -160,5 +160,9 @@ export default {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 40px;
+}
+
+#q-app > div > footer {
+  position: absolute;
 }
 </style>
