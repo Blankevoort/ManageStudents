@@ -152,6 +152,7 @@ export default {
         })
         .then((r) => {
           addStudent.value = false;
+          location.reload();
         });
     }
 
