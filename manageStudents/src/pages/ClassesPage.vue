@@ -71,6 +71,8 @@
         </div>
       </q-dialog>
 
+      <!-- didane tamame danesh amozane class -->
+
       <div
         class="my-default bg-secondary q-px-md text-white"
         v-for="(student, index) in Students"

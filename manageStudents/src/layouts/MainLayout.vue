@@ -1,6 +1,8 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="bg-primary text-white">
+      <!-- Navbar -->
+
       <div class="row justify-between">
         <q-toolbar>
           <q-btn
@@ -24,6 +26,7 @@
 
     <q-drawer v-model="toggleLeftDrawer" side="left" behavior="mobile">
       <!-- drawer content -->
+
       <q-scroll-area
         style="
           height: calc(100% - 150px);
@@ -72,6 +75,8 @@
       <router-view />
     </q-page-container>
 
+    <!-- Footer -->
+
     <q-footer reveal class="bg-transparent">
       <q-img src="/MainImages/Footer.png" class="position-relative footer-img">
         <div class="bg-transparent row items-center q-mt-xl footer-margin">
@@ -109,11 +114,15 @@ import { useQuasar, Cookies } from "quasar";
 
 export default {
   setup() {
+    // Taarife zarf ha
+
     const $q = useQuasar();
     const toggleLeftDrawer = ref(false);
 
     const user = ref([]);
-    const loggedin = ref(false)
+    const loggedin = ref(false);
+
+    // Gereftane User as backend
 
     function getUser() {
       api
@@ -124,9 +133,11 @@ export default {
         })
         .then((r) => {
           user.value = r.data;
-          loggedin.value = true
+          loggedin.value = true;
         });
     }
+
+    // Function logout user
 
     function logout() {
       api
