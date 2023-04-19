@@ -33,7 +33,7 @@
           <q-avatar
             square
             text-color="red-7"
-            icon="folder_special"
+            icon="backpack"
             size="128px"
           />
 
@@ -54,7 +54,7 @@
           <q-avatar
             square
             text-color="amber-7"
-            icon="folder_special"
+            icon="person"
             size="128px"
           />
 
