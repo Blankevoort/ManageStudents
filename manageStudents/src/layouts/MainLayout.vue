@@ -8,7 +8,7 @@
           <q-avatar>
             <img src="/MainImages/logo.png" />
           </q-avatar>
-          <span class="q-px-sm">شهیدان منا</span>
+          <span class="q-px-sm">شهدای منا</span>
         </q-toolbar-title>
 
         <q-toggle

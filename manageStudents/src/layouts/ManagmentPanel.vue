@@ -8,7 +8,7 @@
           <q-avatar>
             <img src="/MainImages/logo.png" />
           </q-avatar>
-          <span class="q-px-sm">شهیدان منا</span>
+          <span class="q-px-sm">شهدای منا</span>
         </q-toolbar-title>
 
         <q-toggle
@@ -59,6 +59,17 @@
           </q-item-section>
 
           <q-item-section>داشبورد</q-item-section>
+        </q-item>
+
+        <q-item to="/about" clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon
+              :color="$q.dark.isActive ? 'white' : 'grey-9'"
+              name="help"
+            />
+          </q-item-section>
+
+          <q-item-section>درباره ما</q-item-section>
         </q-item>
       </q-list>
 
