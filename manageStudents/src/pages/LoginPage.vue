@@ -244,7 +244,7 @@ export default {
           if (r.data.auth_token) {
             $q.cookies.set("token", r.data.auth_token);
             location.reload();
-            $router.push("/panel")
+            $router.push("/panel");
           }
         });
     }

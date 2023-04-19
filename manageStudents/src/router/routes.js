@@ -12,7 +12,6 @@ const routes = [
       requireAuth: true,
     },
   },
-
   {
     path: "/about",
     component: () => import("layouts/MainLayout.vue"),
@@ -20,12 +19,18 @@ const routes = [
       { path: "", component: () => import("src/pages/AboutUsPage.vue") },
     ],
   },
-
   {
     path: "/login",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("src/pages/LoginPage.vue") },
+    ],
+  },
+  {
+    path: "/dashboard",
+    component: () => import("layouts/ManagmentPanel.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/DashboardPage.vue") },
     ],
   },
 

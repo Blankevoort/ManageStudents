@@ -32,7 +32,6 @@ import { ref, onBeforeMount } from "vue";
 import { api } from "src/boot/axios";
 
 import { useQuasar, Cookies, Dark } from "quasar";
-import { watch } from "vue";
 
 export default {
   setup() {
