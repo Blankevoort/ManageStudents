@@ -5,14 +5,6 @@ const routes = [
     children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
   },
   {
-    path: "/class",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/ClassesPage.vue") }],
-    meta: {
-      requireAuth: true,
-    },
-  },
-  {
     path: "/login",
     component: () => import("layouts/MainLayout.vue"),
     children: [
@@ -38,6 +30,13 @@ const routes = [
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/StudentsPage.vue") },
+    ],
+  },
+  {
+    path: "/class",
+    component: () => import("layouts/ManagmentPanel.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/V2/ClassPage.vue") },
     ],
   },
   {

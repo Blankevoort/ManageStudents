@@ -1,12 +1,11 @@
 <template>
   <q-page class="row justify-center content-center align-center items-center">
     <div class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-xl">
-      <q-separator class="q-my-md" />
-
-      <q-card flat>
+      <q-card class="gt-md" flat>
+        <q-separator class="q-my-md" />
         <q-card-section horizontal>
           <q-card-section>
-            معین صداقتی
+            <span class="text-h6">معین صداقتی</span>
             <div class="text-subtitle2">
               سلام.من معین صداقتی هستم از کلاس 902 شهدای منا.دیزاینر این برنامه
               و وب اپلیکیشن.حدود 2سالی میشه که من برنامه نویسی رو شروع کردم و
@@ -18,31 +17,63 @@
           </q-card-section>
 
           <q-avatar size="258px">
-            <q-img src="/MainImages/AboutImages/abdolrahman.png" />
+            <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
           </q-avatar>
         </q-card-section>
+
+        <q-separator class="q-my-md" />
       </q-card>
 
-      <q-separator class="q-my-md" />
-
-      <q-separator class="q-my-md" />
-
-      <q-card flat>
+      <q-card class="gt-md" flat>
+        <q-separator class="q-my-md" />
         <q-card-section horizontal>
           <q-card-section>
-            عبدالرحمان کیانی ، متولد سال ۱۳۸۸ برنامه نویسی رو از یک سال پیش شروع
-            کردم و به یادگیری بک اند وب پرداختم و در حال حاظر به زبان python و
-            فریمورک django برنامه نویسی میکنم ، همچنین در حوزه فرانت اند و
-            موبایل هم فعالیت کوچکی دارم.
+            <span class="text-h6">عبدالرحمان کیانی</span>
+            <div class="text-subtitle2">
+              متولد سال ۱۳۸۸ برنامه نویسی رو از یک سال پیش شروع کردم و به
+              یادگیری بک اند وب پرداختم و در حال حاظر به زبان python و فریمورک
+              django برنامه نویسی میکنم ، همچنین در حوزه فرانت اند و موبایل هم
+              فعالیت کوچکی دارم.
+            </div>
           </q-card-section>
-
           <q-avatar size="258px">
             <q-img src="/MainImages/AboutImages/abdolrahman.png" />
           </q-avatar>
         </q-card-section>
+
+        <q-separator class="q-my-md" />
       </q-card>
 
-      <q-separator class="q-my-md" />
+      <div class="lt-lg">
+        <q-card class="q-my-md">
+          <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+
+          <q-card-section>
+            <span class="text-h6">معین صداقتی</span>
+            <div class="text-subtitle2">
+              سلام.من معین صداقتی هستم از کلاس 902 شهدای منا.دیزاینر این برنامه
+              و وب اپلیکیشن.حدود 2سالی میشه که من برنامه نویسی رو شروع کردم و
+              نصف سال هم در یک شرکت به صورت کار آموزی کار می کردم.تلاش می کردم
+              برای این شرکت برنامه ای بسازم که هم به من و هم به افرادی که از ما
+              حمایت می کنند کمکی شوند.به همین خاطر هنوز هیچ پروژه ی کوچکی انجام
+              ندادم و همیشه در تلاش بودم که در پروژه های بزرگ کار کنم.
+            </div>
+          </q-card-section>
+        </q-card>
+        <q-card class="q-my-md">
+          <q-img src="/MainImages/AboutImages/abdolrahman.png" />
+
+          <q-card-section>
+            <span class="text-h6">عبدالرحمان کیانی</span>
+            <div class="text-subtitle2">
+              متولد سال ۱۳۸۸ برنامه نویسی رو از یک سال پیش شروع کردم و به
+              یادگیری بک اند وب پرداختم و در حال حاظر به زبان python و فریمورک
+              django برنامه نویسی میکنم ، همچنین در حوزه فرانت اند و موبایل هم
+              فعالیت کوچکی دارم.
+            </div>
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-xl">

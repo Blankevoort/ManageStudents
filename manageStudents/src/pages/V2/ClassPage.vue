@@ -1,5 +1,53 @@
 <template>
   <q-page class="q-mx-md">
+    <div class="text-h5 q-py-md">کلاس 902</div>
+
+    <div>
+      <q-card flat bordered>
+        <q-markup-table>
+          <thead>
+            <tr>
+              <th class="text-left text-grey-6">روز</th>
+              <th class="text-right text-grey-6">زنگ اول</th>
+              <th class="text-right text-grey-6">زنگ دوم</th>
+              <th class="text-right text-grey-6">زنگ سوم</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left text-grey-6">شنبه</td>
+              <td class="text-right">ریاضی</td>
+              <td class="text-right">آمادگی</td>
+              <td class="text-right">قرآن</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">یکشنبه</td>
+              <td class="text-right">علوم</td>
+              <td class="text-right">اجتماعی</td>
+              <td class="text-right">علوم/اجتماعی</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">دوشنبه</td>
+              <td class="text-right">زبان انگلیسی</td>
+              <td class="text-right">عربی</td>
+              <td class="text-right">کار و فناوری</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">سه شنبه</td>
+              <td class="text-right">ریاضی</td>
+              <td class="text-right">ورزش</td>
+              <td class="text-right">هنر</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">چهارشنبه</td>
+              <td class="text-right">پیام های آسمانی</td>
+              <td class="text-right">فارسی</td>
+              <td class="text-right">نگارش</td>
+            </tr>
+          </tbody>
+        </q-markup-table>
+      </q-card>
+    </div>
     <q-list>
       <q-item
         class="col-12 q-my-sm full-width"
@@ -13,124 +61,19 @@
           </q-avatar>
         </q-item-section>
         <q-item-section
-          >نام دانش آموز (کلاس 902)
+          >نام دانش آموز
           <q-item-label caption
             >شماره تلفن: 09379608155</q-item-label
           ></q-item-section
         >
         <q-item-section side>
           <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
+            <q-btn flat dense round icon="more_vert" to="student"></q-btn>
           </q-item-label>
         </q-item-section>
       </q-item>
-
-      <q-separator class="q-my-md" />
-
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        @click="setCurrent()"
-      >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >نام دانش آموز (کلاس 902)
-          <q-item-label caption
-            >شماره تلفن: 09379608155</q-item-label
-          ></q-item-section
-        >
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-separator class="q-my-md" />
-
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        @click="setCurrent()"
-      >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >نام دانش آموز (کلاس 902)
-          <q-item-label caption
-            >شماره تلفن: 09379608155</q-item-label
-          ></q-item-section
-        >
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-separator class="q-my-md" />
-
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        @click="setCurrent()"
-      >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >نام دانش آموز (کلاس 902)
-          <q-item-label caption
-            >شماره تلفن: 09379608155</q-item-label
-          ></q-item-section
-        >
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-separator class="q-my-md" />
-
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        @click="setCurrent()"
-      >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >نام دانش آموز (کلاس 902)
-          <q-item-label caption
-            >شماره تلفن: 09379608155</q-item-label
-          ></q-item-section
-        >
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <q-separator class="q-my-md" />
     </q-list>
+    <q-separator class="q-my-md" />
   </q-page>
 </template>
 

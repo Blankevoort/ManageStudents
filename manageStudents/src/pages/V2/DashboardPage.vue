@@ -128,7 +128,7 @@
             <q-markup-table>
               <thead>
                 <tr>
-                  <th class="text-left">نام</th>
+                  <th class="text-left">نام و نام خانوادگی</th>
                   <th class="text-right">کدملی</th>
                   <th class="text-right">سریال شناسنامه</th>
                   <th class="text-right">شماره تلفن</th>
