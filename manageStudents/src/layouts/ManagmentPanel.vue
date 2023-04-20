@@ -1,7 +1,11 @@
 <template>
   <q-layout view="hHh lpR lFr">
     <q-header
-      class="bg-primary flex justify-between content-center align-center"
+      :class="
+        $q.dark.isActive
+          ? 'bg-dark'
+          : 'bg-primary' + 'flex justify-between content-center align-center'
+      "
     >
       <q-toolbar>
         <q-toolbar-title>
@@ -14,7 +18,7 @@
         <q-toggle
           v-model="darkMode"
           checked-icon="dark_mode"
-          color="grey-9"
+          color="grey-10"
           unchecked-icon="light_mode"
           @click="toggleDarkMode"
         />
@@ -37,7 +41,7 @@
       @click.capture="drawerClick"
       :width="250"
       :breakpoint="500"
-      :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'"
+      :class="$q.dark.isActive ? 'bg-dark' : 'bg-grey-3'"
     >
       <div class="q-my-md row">
         <q-avatar class="col-12 q-mini-drawer-hide">
@@ -106,7 +110,18 @@
             />
           </q-item-section>
 
-          <q-item-section>کاربران</q-item-section>
+          <q-item-section>کارکنان</q-item-section>
+        </q-item>
+
+        <q-item to="schedule" class="q-my-sm" clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon
+              :color="$q.dark.isActive ? 'white' : 'grey-9'"
+              name="today"
+            />
+          </q-item-section>
+
+          <q-item-section>برنامه هفتگی</q-item-section>
         </q-item>
       </q-list>
 
