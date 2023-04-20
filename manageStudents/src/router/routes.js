@@ -13,13 +13,6 @@ const routes = [
     },
   },
   {
-    path: "/about",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      { path: "", component: () => import("src/pages/AboutUsPage.vue") },
-    ],
-  },
-  {
     path: "/login",
     component: () => import("layouts/MainLayout.vue"),
     children: [
@@ -45,6 +38,20 @@ const routes = [
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/StudentsPage.vue") },
+    ],
+  },
+  {
+    path: "/student",
+    component: () => import("layouts/ManagmentPanel.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/V2/StudentPage.vue") },
+    ],
+  },
+  {
+    path: "/about",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/V2/AboutPage.vue") },
     ],
   },
 
