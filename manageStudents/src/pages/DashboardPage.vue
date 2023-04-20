@@ -18,8 +18,10 @@
             />
 
             <q-card-section class="q-mt-md">
-              <div>کلاس ها:</div>
-              <div class="text-subtitle3 q-mt-sm">(تعداد کلاس)</div>
+              <div class="text-white">
+                کلاس ها:
+              </div>
+              <div class="text-white q-mt-sm">(تعداد کلاس)</div>
             </q-card-section>
           </q-card-section>
         </q-card>
@@ -34,8 +36,8 @@
             <q-avatar square text-color="red-7" icon="backpack" size="128px" />
 
             <q-card-section class="q-mt-md">
-              <div>دانش آموزان:</div>
-              <div class="text-subtitle3 q-mt-sm">(تعداد دانش آموزان)</div>
+              <div class="text-white">دانش آموزان:</div>
+              <div class="text-white q-mt-sm">(تعداد دانش آموزان)</div>
             </q-card-section>
           </q-card-section>
         </q-card>
@@ -50,17 +52,23 @@
             <q-avatar square text-color="amber-7" icon="person" size="128px" />
 
             <q-card-section class="q-mt-md">
-              <div>کارکنان:</div>
-              <div class="text-subtitle3 q-mt-sm">(تعداد کارکنان)</div>
+              <div  class="text-white">کارکنان:</div>
+              <div class="text-white q-mt-sm">(تعداد کارکنان)</div>
             </q-card-section>
           </q-card-section>
         </q-card>
       </div>
     </div>
 
+    <div></div>
     <div class="text-h4 q-my-md q-mb-lg">
       کلاس ها
-      <q-btn flat icon-right="arrow_back" color="primary" class="q-px-md" to="/classes"
+      <q-btn
+        flat
+        icon-right="arrow_back"
+        color="primary"
+        class="q-px-md"
+        to="/classes"
         >مشاهده کلاس ها</q-btn
       >
     </div>

@@ -112,17 +112,6 @@
 
           <q-item-section>کارکنان</q-item-section>
         </q-item>
-
-        <q-item to="schedule" class="q-my-sm" clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="today"
-            />
-          </q-item-section>
-
-          <q-item-section>برنامه هفتگی</q-item-section>
-        </q-item>
       </q-list>
 
       <div
