@@ -1,59 +1,123 @@
 <template>
+  <!-- in page ba kami fasele az do samte rast o chap gharar migire -->
   <q-page class="q-mx-md">
-    <div class="text-h5 q-py-md">کلاس 902</div>
+    <!-- nam class -->
+    <div class="text-h5 q-py-md">
+      کلاس {{ currentClass }}
 
-    <div>
-      <q-card flat bordered>
-        <q-markup-table>
-          <thead>
-            <tr>
-              <th class="text-left text-grey-6">روز</th>
-              <th class="text-right text-grey-6">زنگ اول</th>
-              <th class="text-right text-grey-6">زنگ دوم</th>
-              <th class="text-right text-grey-6">زنگ سوم</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left text-grey-6">شنبه</td>
-              <td class="text-right">ریاضی</td>
-              <td class="text-right">آمادگی</td>
-              <td class="text-right">قرآن</td>
-            </tr>
-            <tr>
-              <td class="text-left text-grey-6">یکشنبه</td>
-              <td class="text-right">علوم</td>
-              <td class="text-right">اجتماعی</td>
-              <td class="text-right">علوم/اجتماعی</td>
-            </tr>
-            <tr>
-              <td class="text-left text-grey-6">دوشنبه</td>
-              <td class="text-right">زبان انگلیسی</td>
-              <td class="text-right">عربی</td>
-              <td class="text-right">کار و فناوری</td>
-            </tr>
-            <tr>
-              <td class="text-left text-grey-6">سه شنبه</td>
-              <td class="text-right">ریاضی</td>
-              <td class="text-right">ورزش</td>
-              <td class="text-right">هنر</td>
-            </tr>
-            <tr>
-              <td class="text-left text-grey-6">چهارشنبه</td>
-              <td class="text-right">پیام های آسمانی</td>
-              <td class="text-right">فارسی</td>
-              <td class="text-right">نگارش</td>
-            </tr>
-          </tbody>
-        </q-markup-table>
-      </q-card>
+      <!-- hazfe class -->
+
+      <q-btn
+        class="float-right q-mx-md"
+        color="red-5"
+        unelevated
+        @click="RemoveClass"
+      >
+        <q-icon left size="2em" name="delete" />
+        <div>حذف کلاس</div>
+      </q-btn>
+
+      <!-- afzodane danesh amoz be in class -->
+
+      <q-btn
+        class="float-right q-mx-md"
+        color="accent"
+        icon="add"
+        label="افزودن دانش آموز"
+        @click="addStudent = true"
+      />
     </div>
-    <q-list>
+
+    <!-- pop up baraye afzodane danesh amoz -->
+
+    <q-dialog v-model="addStudent">
+      <div class="row">
+        <q-card square class="shadow-24" style="width: 300px; height: 575px">
+          <q-card-section class="bg-primary">
+            <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
+            <div
+              class="absolute-bottom-right q-pr-md"
+              style="transform: translateY(50%)"
+            ></div>
+          </q-card-section>
+          <q-card-section>
+            <q-form class="q-px-sm q-pt-xl">
+              <q-input
+                square
+                clearable
+                v-model="first_name"
+                label="نام"
+                autofocus
+              >
+                <template v-slot:prepend>
+                  <q-icon name="person" />
+                </template>
+              </q-input>
+              <q-input
+                square
+                clearable
+                v-model="last_name"
+                label="نام خانوادگی"
+                autofocus
+              >
+                <template v-slot:prepend>
+                  <q-icon name="groups" />
+                </template>
+              </q-input>
+              <q-input
+                v-model="number"
+                style="max-width: 300px"
+                label="شماره دانش آموز"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="phone" />
+                </template>
+              </q-input>
+              <q-input
+                v-model="serialCode"
+                style="max-width: 300px"
+                label="سریال شناسنامه"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="sort" />
+                </template>
+              </q-input>
+              <q-input
+                v-model="studentId"
+                style="max-width: 300px"
+                label="کدملی"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="mail_lock" />
+                </template>
+              </q-input>
+            </q-form>
+          </q-card-section>
+          <q-card-actions class="q-px-lg flex justify-center">
+            <q-btn
+              unelevated
+              size="lg"
+              :color="$q.dark.isActive ? 'dark' : 'grey-9'"
+              class="full-width"
+              label="افزودن"
+              @click="AddNewStudent()"
+            />
+          </q-card-actions>
+        </q-card>
+      </div>
+    </q-dialog>
+
+    <!-- neshon dadane list danesh amozan -->
+
+    <q-list
+      v-for="(student, index) in Students"
+      :key="'classInfo-' + index + 1"
+    >
       <q-item
         class="col-12 q-my-sm full-width"
         clickable
         v-ripple
-        @click="setCurrent()"
+        @click="setCurrent(student.id)"
       >
         <q-item-section avatar>
           <q-avatar>
@@ -61,9 +125,9 @@
           </q-avatar>
         </q-item-section>
         <q-item-section
-          >نام دانش آموز
+          >{{ student.full_name }}
           <q-item-label caption
-            >شماره تلفن: 09379608155</q-item-label
+            >شماره تلفن: {{ student.number }}</q-item-label
           ></q-item-section
         >
         <q-item-section side>
@@ -72,12 +136,13 @@
           </q-item-label>
         </q-item-section>
       </q-item>
+      <q-separator class="q-my-md" />
     </q-list>
-    <q-separator class="q-my-md" />
   </q-page>
 </template>
 
 <script>
+// baraye tarife zarf ha va vasl shodan be backend bayad in gozine ha tarif shavand
 import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
@@ -85,113 +150,107 @@ import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
 import { currentStudentID } from "src/stores/StudentId";
+
+import { currentClassID } from "src/stores/classID";
 import { storeToRefs } from "pinia";
 
 export default {
   setup() {
+    // tarife zard haye morede niaz
     const $q = useQuasar();
-    const Classes = ref();
-    const user = ref([]);
+    const $router = useRouter();
+    const Students = ref([]);
+    const addStudent = ref(false);
+
+    const first_name = ref();
+    const last_name = ref();
+    const number = ref();
+    const serialCode = ref();
+    const studentId = ref();
+
+    const storeClass = currentClassID();
+    const currentClass = computed(() => storeClass.current);
 
     const store = currentStudentID();
-    const current = computed(() => store.current);
+    const currentStudent = computed(() => store.currentStudent);
     const setCurrent = (data) => store.setCurrent(data);
     const showCurrent = computed(() => store.showCurrent);
-    const storeStudentID = currentStudentID();
+    const storeClassID = currentStudentID();
 
-    const loggedIn = ref(false);
-    const username = ref();
-    const password = ref();
-    const addClass = ref(false);
+    // Tarife dastorat
 
-    const classId = ref();
+    // hazf kardane in class
 
-    function AddNewClass() {
-      var id = {
-        class_id: classId.value,
+    function RemoveClass() {
+      api
+        .delete("classes/" + currentClass.value + "/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          $router.push("/classes");
+        });
+    }
+
+    // afzodane danesh amoz be in class
+
+    function AddNewStudent() {
+      var data = {
+        first_name: first_name.value,
+        last_name: last_name.value,
+        number: number.value,
+        serial_code: serialCode.value,
+        student_id: studentId.value,
+        class_room: currentClass.value,
       };
       api
-        .post("classes/", id, {
+        .post("students/", data, {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
         })
         .then((r) => {
-          addClass.value = false;
+          addStudent.value = false;
           location.reload();
         });
     }
 
-    function RemoveClass(index) {
+    // gereftane class baraye neshan dadane etelaate dakhele on
+
+    function getClass() {
       api
-        .delete("classes/" + Classes.value[index].class_id + "/", {
+        .get("classes/" + currentClass.value, {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
         })
         .then((r) => {
-          location.reload();
+          Students.value = r.data.students;
         });
     }
 
-    function Login() {
-      api
-        .post("auth/token/login/", {
-          username: username.value,
-          password: password.value,
-        })
-        .then((r) => {
-          if (r.data.auth_token) {
-            $q.cookies.set("token", r.data.auth_token);
-            loggedIn.value = false;
-            location.reload();
-          }
-        });
-    }
-
-    function getUser() {
-      api
-        .get("auth/users/me/", {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          user.value = r.data;
-          loggedIn.value = true;
-        });
-    }
-
-    function getClasses() {
-      api
-        .get("classes/", {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          Classes.value = r.data;
-        });
-    }
+    // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
     onBeforeMount(() => {
-      getUser();
-      getClasses();
+      // gereftane class baraye neshan dadane etelaate dakhele on
+      getClass();
     });
 
+    // tarife zarf ha va dastorat
+
     return {
-      classId,
-      username,
-      user,
-      password,
-      loggedIn,
-      confirm,
-      Classes,
-      getUser,
-      addClass,
-      AddNewClass,
+      first_name,
+      last_name,
+      number,
+      serialCode,
+      studentId,
+      addStudent,
+      Students,
+      currentStudent,
+      currentClass,
       RemoveClass,
-      Login,
+      AddNewStudent,
       setCurrent,
     };
   },

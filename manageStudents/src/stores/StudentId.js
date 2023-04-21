@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
 
-export const currentStudentID = defineStore("current", {
+export const currentStudentID = defineStore("currentStudent", {
   state: () => ({
-    current: [],
+    currentStudent: [],
   }),
 
   getters: {
     showCurrent(state) {
-      return state.current;
+      return state.currentStudent;
     },
   },
 
   actions: {
     setCurrent(data) {
-      this.current = data;
+      this.currentStudent = data;
       this.router.push("/student");
     },
   },

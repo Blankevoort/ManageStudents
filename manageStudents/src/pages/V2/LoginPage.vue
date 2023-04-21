@@ -1,8 +1,12 @@
 <template>
+  <!-- tamami design haye in safhe dar vasate an gharar migirand -->
   <q-page class="fit row justify-around items-center content-center">
     <div
-      class="q-my-md col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
+      class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
     >
+
+    <!-- form vorode karkonan -->
+
       <q-form>
         <div class="text-h4 text-center">ورود کارکنان</div>
         <div class="q-mt-xl full-width">
@@ -30,8 +34,11 @@
           ></q-input>
         </div>
 
+        <!-- dokmeie vorode karkonan -->
+
         <div class="q-mt-md">
           <q-btn
+            @click="Login"
             label="ورود به پنل"
             type="submit"
             color="primary"
@@ -40,8 +47,13 @@
         </div>
       </q-form>
     </div>
+
+    <!-- tozihe ghabliat haye in application va khobi haye an -->
+
+    <!-- in design dar dastgah haye bozorg tar neshan dade mishavad -->
+
     <div
-      class="q-my-md col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center gt-md"
+      class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
     >
       <div>
         <div>
@@ -108,6 +120,9 @@
         </q-list>
       </div>
     </div>
+
+    <!-- in design dar dastgah haye besiat kochak manande mobile neshan dade mishavad -->
+
     <div
       class="q-my-md col-sm-12 flex justify-center content-center align-center lt-md"
     >
@@ -180,6 +195,7 @@
 </template>
 
 <script>
+// baraye tarife zarf ha va vasl shodan be backend bayad in gozine ha tarif shavand
 import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
@@ -191,48 +207,16 @@ import { storeToRefs } from "pinia";
 
 export default {
   setup() {
+    // tarife zard haye morede niaz
     const $q = useQuasar();
-    const Classes = ref();
-    const user = ref([]);
-
-    const store = currentClassID();
-    const current = computed(() => store.current);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeClassID = currentClassID();
+    const $router = useRouter();
 
     const username = ref();
     const password = ref();
-    const addClass = ref(false);
-    const classId = ref();
 
-    function AddNewClass() {
-      var id = {
-        class_id: classId.value,
-      };
-      api
-        .post("classes/", id, {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          addClass.value = false;
-          location.reload();
-        });
-    }
+    // Tarife dastorat
 
-    function RemoveClass(index) {
-      api
-        .delete("classes/" + Classes.value[index].class_id + "/", {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          location.reload();
-        });
-    }
+    // dastore vorod be panel
 
     function Login() {
       api
@@ -243,54 +227,17 @@ export default {
         .then((r) => {
           if (r.data.auth_token) {
             $q.cookies.set("token", r.data.auth_token);
-            location.reload();
-            $router.push("/panel");
+            $router.push("/");
           }
         });
     }
 
-    function getUser() {
-      api
-        .get("auth/users/me/", {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          user.value = r.data;
-        });
-    }
-
-    function getClasses() {
-      api
-        .get("classes/", {
-          headers: {
-            Authorization: "Token " + $q.cookies.get("token"),
-          },
-        })
-        .then((r) => {
-          Classes.value = r.data;
-        });
-    }
-
-    onBeforeMount(() => {
-      getUser();
-      getClasses();
-    });
-
+    // tarife zarf ha va dastorat
+    
     return {
-      classId,
       username,
-      user,
       password,
-      confirm,
-      Classes,
-      getUser,
-      addClass,
-      AddNewClass,
-      RemoveClass,
       Login,
-      setCurrent,
     };
   },
 };

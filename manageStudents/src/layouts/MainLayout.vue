@@ -4,12 +4,14 @@
       class="bg-primary flex justify-between content-center align-center"
     >
       <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="/MainImages/logo.png" />
-          </q-avatar>
-          <span class="q-px-sm">شهدای منا</span>
-        </q-toolbar-title>
+          <q-toolbar-title>
+            <q-btn flat to="/">
+            <q-avatar>
+              <img src="/MainImages/logo.png" />
+            </q-avatar>
+            <span class="q-px-sm text-h5">شهدای منا</span>
+          </q-btn>
+          </q-toolbar-title>
 
         <q-toggle
           v-model="darkMode"
@@ -36,29 +38,13 @@ import { useQuasar, Cookies, Dark } from "quasar";
 export default {
   setup() {
     // Taarife zarf ha
+    const miniState = ref(false);
 
     const $q = useQuasar();
     const darkMode = ref(false);
     const dark = ref(localStorage.getItem("dark"));
-    // const toggleLeftDrawer = ref(false);
 
-    // const user = ref([]);
-    // const loggedin = ref(false);
-
-    // Gereftane User as backend
-
-    // function getUser() {
-    //   api
-    //     .get("auth/users/me/", {
-    //       headers: {
-    //         Authorization: "Token " + $q.cookies.get("token"),
-    //       },
-    //     })
-    //     .then((r) => {
-    //       user.value = r.data;
-    //       loggedin.value = true;
-    //     });
-    // }
+    const user = ref([]);
 
     // function ha
 
@@ -72,42 +58,38 @@ export default {
       }
     }
 
+    // Function baraye check kardane localstorage
+
     function checkDark() {
       if (dark.value) {
         $q.dark.set(true);
-        darkMode.value = true
+        darkMode.value = true;
       } else {
         $q.dark.set(false);
-        darkMode.value = false
+        darkMode.value = false;
       }
     }
 
-    // Function logout user
-
-    // function logout() {
-    //   api
-    //     .post("auth/token/logout/")
-    //     .then($q.cookies.remove("token"))
-    //     .then(location.reload());
-    // }
-
     onBeforeMount(() => {
-      // getUser();
-      checkDark()
+      checkDark();
     });
 
     return {
-      // user,
-      // loggedin,
-      // logout,
-      // toggleLeftDrawer,
+      user,
       toggleDarkMode,
       darkMode,
       dark,
       checkDark,
-      // ToggleLeftDrawer() {
-      //   toggleLeftDrawer.value = !toggleLeftDrawer.value;
-      // },
+
+      drawer: ref(false),
+      miniState,
+
+      drawerClick(e) {
+        if (miniState.value) {
+          miniState.value = false;
+          e.stopPropagation();
+        }
+      },
     };
   },
 };

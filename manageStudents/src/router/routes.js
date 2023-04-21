@@ -1,22 +1,23 @@
 const routes = [
   {
-    path: "/",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
-  },
-  {
     path: "/login",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/LoginPage.vue") },
     ],
+    meta: {
+      login: true,
+    },
   },
   {
-    path: "/dashboard",
+    path: "/",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/DashboardPage.vue") },
     ],
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/classes",
@@ -24,6 +25,9 @@ const routes = [
     children: [
       { path: "", component: () => import("src/pages/V2/ClassesPage.vue") },
     ],
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/students",
@@ -31,6 +35,9 @@ const routes = [
     children: [
       { path: "", component: () => import("src/pages/V2/StudentsPage.vue") },
     ],
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/class",
@@ -38,6 +45,9 @@ const routes = [
     children: [
       { path: "", component: () => import("src/pages/V2/ClassPage.vue") },
     ],
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/student",
@@ -45,6 +55,19 @@ const routes = [
     children: [
       { path: "", component: () => import("src/pages/V2/StudentPage.vue") },
     ],
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/users",
+    component: () => import("layouts/ManagmentPanel.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/V2/UsersPage.vue") },
+    ],
+    meta: {
+      requireAuth: true,
+    },
   },
   {
     path: "/about",
@@ -54,8 +77,6 @@ const routes = [
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

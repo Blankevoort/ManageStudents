@@ -8,11 +8,14 @@
       "
     >
       <q-toolbar>
+
         <q-toolbar-title>
+          <q-btn flat to="/">
           <q-avatar>
             <img src="/MainImages/logo.png" />
           </q-avatar>
-          <span class="q-px-sm">شهدای منا</span>
+          <span class="q-px-sm text-h5">شهدای منا</span>
+        </q-btn>
         </q-toolbar-title>
 
         <q-toggle
@@ -50,7 +53,7 @@
             style="width: 85px; height: 85px"
           />
         </q-avatar>
-        <div class="col-12 text-center q-mt-md">نام کاربری</div>
+        <div class="col-12 text-center q-mt-md">{{ user.username }}</div>
       </div>
 
       <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
@@ -129,7 +132,7 @@
       <q-separator inset />
 
       <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
-        <q-item class="q-my-sm bg-red-3" clickable v-ripple @click="logout()">
+        <q-item class="q-my-sm bg-red-3" clickable v-ripple @click="logout">
           <q-item-section avatar>
             <q-icon
               :color="$q.dark.isActive ? 'white' : 'grey-9'"
@@ -150,8 +153,9 @@
 
 <script>
 import { ref, onBeforeMount } from "vue";
+import { api } from "src/boot/axios";
 
-import { useQuasar, Dark } from "quasar";
+import { useQuasar, Cookies, Dark } from "quasar";
 
 export default {
   setup() {
@@ -160,6 +164,8 @@ export default {
     const $q = useQuasar();
     const darkMode = ref(false);
     const dark = ref(localStorage.getItem("dark"));
+
+    const user = ref([]);
 
     function toggleDarkMode() {
       if ($q.dark.isActive) {
@@ -181,11 +187,41 @@ export default {
       }
     }
 
+    // Gereftane User as backend
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
+    // Function logout user
+
+    function logout() {
+      api
+        .post("auth/token/logout/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then($q.cookies.remove("token"))
+        .then(location.reload());
+    }
+
     onBeforeMount(() => {
+      getUser();
       checkDark();
     });
 
     return {
+      user,
+      logout,
       toggleDarkMode,
       darkMode,
       dark,
