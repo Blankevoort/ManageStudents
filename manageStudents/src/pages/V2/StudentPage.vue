@@ -1,7 +1,6 @@
 <template>
   <!-- in page ba kami fasele az tamame samt ha gharar migire -->
   <q-page class="q-pa-md">
-
     <!-- neshan dadane etelaate danesh amoz -->
 
     <div>
@@ -22,8 +21,11 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
           شماره سریال شناسنامه: {{ student.serial_code }}
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12 col-12 q-py-sm">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
           شماره تماس: {{ student.number }}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          شماره کلاس: {{ student.class_room }}
         </div>
       </div>
     </div>
@@ -67,6 +69,13 @@
           filled
           v-model="serialCode"
           label="سریال شناسنامه"
+        />
+
+        <q-input
+          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+          filled
+          v-model="classRoom"
+          label="کلاس دانش آموز"
         />
 
         <!-- taghir dadane etelaate danesh amoz ba tavajoh be vorodi ha -->
@@ -121,6 +130,7 @@ export default {
     const number = ref();
     const serialCode = ref();
     const studentId = ref();
+    const classRoom = ref();
 
     const store = currentStudentID();
     const currentStudent = computed(() => store.currentStudent);
@@ -153,6 +163,7 @@ export default {
         number: number.value,
         serial_code: serialCode.value,
         student_id: studentId.value,
+        class_room: classRoom.value,
       };
       api
         .patch("students/" + student.value.id + "/", data, {
@@ -197,6 +208,7 @@ export default {
       currentStudent,
       EditStudent,
       RemoveClass,
+      classRoom,
       setCurrent,
     };
   },
