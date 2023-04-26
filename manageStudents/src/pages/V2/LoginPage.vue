@@ -4,8 +4,7 @@
     <div
       class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
     >
-
-    <!-- form vorode karkonan -->
+      <!-- form vorode karkonan -->
 
       <q-form>
         <div class="text-h4 text-center">ورود کارکنان</div>
@@ -53,7 +52,7 @@
     <!-- in design dar dastgah haye bozorg tar neshan dade mishavad -->
 
     <div
-      class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
+      class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center gt-sm"
     >
       <div>
         <div>
@@ -233,7 +232,7 @@ export default {
     }
 
     // tarife zarf ha va dastorat
-    
+
     return {
       username,
       password,
