@@ -200,9 +200,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
-import { currentClassID } from "src/stores/classID";
-import { storeToRefs } from "pinia";
-
 export default {
   setup() {
     // tarife zard haye morede niaz

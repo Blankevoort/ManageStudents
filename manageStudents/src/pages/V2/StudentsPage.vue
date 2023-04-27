@@ -114,7 +114,7 @@
         class="col-12 q-my-sm full-width"
         clickable
         v-ripple
-        @click="setCurrent(student.id)"
+        :to="'/student/' + student.id"
       >
         <q-item-section avatar>
           <q-avatar>
@@ -154,9 +154,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
-import { currentStudentID } from "src/stores/StudentId";
-import { storeToRefs } from "pinia";
-
 export default {
   setup() {
     // tarife zard haye morede niaz
@@ -171,12 +168,6 @@ export default {
     const serialCode = ref();
     const studentId = ref();
     const class_room = ref();
-
-    const store = currentStudentID();
-    const current = computed(() => store.current);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeClassID = currentStudentID();
 
     // Tarife dastorat
 
@@ -223,9 +214,9 @@ export default {
       // gereftane tamami danesh amoza
 
       getStudents();
-
-      // tarife zarf ha va dastorat
     });
+
+    // tarife zarf ha va dastorat
 
     return {
       first_name,
@@ -236,7 +227,6 @@ export default {
       class_room,
       Students,
       addStudent,
-      setCurrent,
       AddNewStudent,
     };
   },

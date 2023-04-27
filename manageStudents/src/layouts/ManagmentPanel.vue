@@ -83,7 +83,7 @@
       <q-separator inset />
 
       <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
-        <q-item to="classes" class="q-my-sm" clickable v-ripple>
+        <q-item to="/classes" class="q-my-sm" clickable v-ripple>
           <q-item-section avatar>
             <q-icon
               :color="$q.dark.isActive ? 'white' : 'grey-9'"
@@ -94,7 +94,7 @@
           <q-item-section>کلاس ها</q-item-section>
         </q-item>
 
-        <q-item to="students" class="q-my-sm" clickable v-ripple>
+        <q-item to="/students" class="q-my-sm" clickable v-ripple>
           <q-item-section avatar>
             <q-icon
               :color="$q.dark.isActive ? 'white' : 'grey-9'"
@@ -105,7 +105,7 @@
           <q-item-section>دانش آموزان</q-item-section>
         </q-item>
 
-        <q-item to="users" class="q-my-sm" clickable v-ripple>
+        <q-item to="/users" class="q-my-sm" clickable v-ripple>
           <q-item-section avatar>
             <q-icon
               :color="$q.dark.isActive ? 'white' : 'grey-9'"

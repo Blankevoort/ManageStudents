@@ -111,17 +111,15 @@
 import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
-
-import { currentStudentID } from "src/stores/StudentId";
-import { storeToRefs } from "pinia";
 
 export default {
   setup() {
     // tarife zard haye morede niaz
 
     const $q = useQuasar();
+    const $route = useRoute();
     const $router = useRouter();
     const student = ref([]);
 
@@ -132,19 +130,13 @@ export default {
     const studentId = ref();
     const classRoom = ref();
 
-    const store = currentStudentID();
-    const currentStudent = computed(() => store.currentStudent);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeStudentID = currentStudentID();
-
     // Tarife dastorat
 
     // dastore hazf kardane class
 
     function RemoveClass() {
       api
-        .delete("students/" + currentStudent.value + "/", {
+        .delete("students/" + $route.params.id + "/", {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
@@ -180,7 +172,7 @@ export default {
 
     function getStudent() {
       api
-        .get("students/" + currentStudent.value, {
+        .get("students/" + $route.params.id, {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
@@ -205,11 +197,9 @@ export default {
       number,
       serialCode,
       studentId,
-      currentStudent,
       EditStudent,
       RemoveClass,
       classRoom,
-      setCurrent,
     };
   },
 };

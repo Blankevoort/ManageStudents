@@ -40,7 +40,7 @@ const routes = [
     },
   },
   {
-    path: "/class",
+    path: "/class/:id",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/ClassPage.vue") },
@@ -50,7 +50,7 @@ const routes = [
     },
   },
   {
-    path: "/student",
+    path: "/student/:id",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/StudentPage.vue") },

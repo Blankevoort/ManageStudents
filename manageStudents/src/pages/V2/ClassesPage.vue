@@ -5,7 +5,7 @@
       <div class="text-h4 q-py-md q-mb-lg">
         تمامی کلاس ها
 
-<!-- dokmeie afzodane class jadid -->
+        <!-- dokmeie afzodane class jadid -->
 
         <q-btn
           class="float-right"
@@ -64,7 +64,7 @@
           v-for="(classInfo, index) in Classes"
           :key="'classInfo-' + index + 1"
         >
-          <q-item clickable v-ripple @click="setCurrent(classInfo.class_id)">
+          <q-item clickable v-ripple :to="'/class/' + classInfo.class_id">
             <q-item-section>کلاس {{ classInfo.class_id }}</q-item-section>
             <q-item-section side>
               <q-item-label>
@@ -87,9 +87,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
-import { currentClassID } from "src/stores/classID";
-import { storeToRefs } from "pinia";
-
 export default {
   setup() {
     // tarife zard haye morede niaz
@@ -98,12 +95,6 @@ export default {
     const classId = ref();
 
     const $q = useQuasar();
-
-    const store = currentClassID();
-    const current = computed(() => store.current);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeClassID = currentClassID();
 
     // Tarife dastorat
 
@@ -144,14 +135,13 @@ export default {
       // gereftane class ha
       getClasses();
     });
-      // tarife zarf ha va dastorat
+    // tarife zarf ha va dastorat
 
     return {
       classId,
       Classes,
       addClass,
       AddNewClass,
-      setCurrent,
     };
   },
 };

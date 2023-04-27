@@ -182,9 +182,6 @@ import { api } from "src/boot/axios";
 import { useRouter } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
 
-import { currentClassID } from "src/stores/classID";
-import { storeToRefs } from "pinia";
-
 export default {
   setup() {
     // tarife zard haye morede niaz
@@ -193,12 +190,6 @@ export default {
     const classId = ref();
     const addClass = ref(false);
     const Class = ref([]);
-
-    const store = currentClassID();
-    const current = computed(() => store.current);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeClassID = currentClassID();
 
     // Tarife dastorat
 
@@ -249,7 +240,6 @@ export default {
       Class,
       addClass,
       AddNewClass,
-      setCurrent,
     };
   },
 };

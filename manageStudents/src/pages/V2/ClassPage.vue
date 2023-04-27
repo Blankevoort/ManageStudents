@@ -3,7 +3,7 @@
   <q-page class="q-mx-md">
     <!-- nam class -->
     <div class="text-h5 q-py-md">
-      کلاس {{ currentClass }}
+      کلاس {{ Class.class_id }}
 
       <!-- hazfe class -->
 
@@ -117,7 +117,7 @@
         class="col-12 q-my-sm full-width"
         clickable
         v-ripple
-        @click="setCurrent(student.id)"
+        :to="'/student/' + student.id"
       >
         <q-item-section avatar>
           <q-avatar>
@@ -146,21 +146,18 @@
 import { ref, onBeforeMount, computed } from "vue";
 import { api } from "src/boot/axios";
 
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useQuasar, Cookies } from "quasar";
-
-import { currentStudentID } from "src/stores/StudentId";
-
-import { currentClassID } from "src/stores/classID";
-import { storeToRefs } from "pinia";
 
 export default {
   setup() {
     // tarife zard haye morede niaz
     const $q = useQuasar();
+    const $route = useRoute();
     const $router = useRouter();
     const Students = ref([]);
     const addStudent = ref(false);
+    const Class = ref([]);
 
     const first_name = ref();
     const last_name = ref();
@@ -168,22 +165,13 @@ export default {
     const serialCode = ref();
     const studentId = ref();
 
-    const storeClass = currentClassID();
-    const currentClass = computed(() => storeClass.current);
-
-    const store = currentStudentID();
-    const currentStudent = computed(() => store.currentStudent);
-    const setCurrent = (data) => store.setCurrent(data);
-    const showCurrent = computed(() => store.showCurrent);
-    const storeClassID = currentStudentID();
-
     // Tarife dastorat
 
     // hazf kardane in class
 
     function RemoveClass() {
       api
-        .delete("classes/" + currentClass.value + "/", {
+        .delete("classes/" + $route.params.id + "/", {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
@@ -202,7 +190,7 @@ export default {
         number: number.value,
         serial_code: serialCode.value,
         student_id: studentId.value,
-        class_room: currentClass.value,
+        class_room: $route.params.id,
       };
       api
         .post("students/", data, {
@@ -220,12 +208,13 @@ export default {
 
     function getClass() {
       api
-        .get("classes/" + currentClass.value, {
+        .get("classes/" + $route.params.id, {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
         })
         .then((r) => {
+          Class.value = r.data;
           Students.value = r.data.students;
         });
     }
@@ -240,6 +229,7 @@ export default {
     // tarife zarf ha va dastorat
 
     return {
+      Class,
       first_name,
       last_name,
       number,
@@ -247,11 +237,8 @@ export default {
       studentId,
       addStudent,
       Students,
-      currentStudent,
-      currentClass,
       RemoveClass,
       AddNewStudent,
-      setCurrent,
     };
   },
 };
