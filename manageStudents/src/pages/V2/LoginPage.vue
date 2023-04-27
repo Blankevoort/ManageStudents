@@ -6,7 +6,7 @@
     >
       <!-- form vorode karkonan -->
 
-      <q-form>
+      <q-form @submit="Login">
         <div class="text-h4 text-center">ورود کارکنان</div>
         <div class="q-mt-xl full-width">
           <div class="q-my-md" style="font-size: 18px">نام کاربری</div>
@@ -37,7 +37,6 @@
 
         <div class="q-mt-md">
           <q-btn
-            @click="Login"
             label="ورود به پنل"
             type="submit"
             color="primary"
