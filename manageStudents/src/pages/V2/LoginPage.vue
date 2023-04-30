@@ -44,6 +44,9 @@
           />
         </div>
       </q-form>
+      <div class="q-my-md text-negative" v-if="error">
+        {{ error }}
+      </div>
     </div>
 
     <!-- tozihe ghabliat haye in application va khobi haye an -->
@@ -205,6 +208,7 @@ export default {
     // tarife zard haye morede niaz
     const $q = useQuasar();
     const $router = useRouter();
+    const error = ref();
 
     const username = ref();
     const password = ref();
@@ -224,6 +228,10 @@ export default {
             $q.cookies.set("token", r.data.auth_token);
             $router.push("/");
           }
+        })
+        .catch((err) => {
+          console.log(err.response.data.non_field_errors);
+          error.value = err.response.data.non_field_errors;
         });
     }
 
@@ -232,6 +240,7 @@ export default {
     return {
       username,
       password,
+      error,
       Login,
     };
   },
