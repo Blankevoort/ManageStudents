@@ -19,7 +19,7 @@
 
     <q-dialog v-model="addUser">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 375px">
+        <q-card square class="shadow-24" style="width: 300px; height: 400px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن کارکن</h4>
             <div
@@ -35,6 +35,7 @@
                 v-model="username"
                 label="نام کاربری"
                 autofocus
+                :rules="[(val) => !!val || 'نام کاربری کارکن اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="person" />
@@ -46,6 +47,7 @@
                 v-model="password"
                 label="رمز عبور"
                 autofocus
+                :rules="[(val) => !!val || ' رمز عبور کارکن اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="enhanced_encryption" />

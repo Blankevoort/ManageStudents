@@ -17,7 +17,7 @@
 
     <q-dialog v-model="addStudent">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 600px">
+        <q-card square class="shadow-24" style="width: 300px; height: 700px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
             <div
@@ -33,6 +33,7 @@
                 v-model="first_name"
                 label="نام"
                 autofocus
+                :rules="[(val) => !!val || 'نام دانش آموز اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="person" />
@@ -44,6 +45,7 @@
                 v-model="last_name"
                 label="نام خانوادگی"
                 autofocus
+                :rules="[(val) => !!val || 'نام خانوادگی دانش آموز اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="groups" />
@@ -53,6 +55,8 @@
                 v-model="number"
                 style="max-width: 300px"
                 label="شماره دانش آموز"
+                :rules="[(val) => !!val || 'شماره تلفن دانش آموز اجباری است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="phone" />
@@ -62,6 +66,10 @@
                 v-model="serialCode"
                 style="max-width: 300px"
                 label="سریال شناسنامه"
+                :rules="[
+                  (val) => !!val || 'سریال شناسنامه دانش آموز اجباری است',
+                ]"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="sort" />
@@ -71,6 +79,8 @@
                 v-model="studentId"
                 style="max-width: 300px"
                 label="کدملی"
+                :rules="[(val) => !!val || 'کد ملی دانش آموز اجباری است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="mail_lock" />
@@ -80,6 +90,8 @@
                 v-model="class_room"
                 style="max-width: 300px"
                 label="کلاس"
+                :rules="[(val) => !!val || 'کلاس دانش آموز اجباری است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="school" />

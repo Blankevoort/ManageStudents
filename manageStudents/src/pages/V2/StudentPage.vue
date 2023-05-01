@@ -3,7 +3,7 @@
   <q-page class="q-pa-md">
     <!-- neshan dadane etelaate danesh amoz -->
 
-    <div>
+    <div v-if="student.length != 0">
       <div class="flex justify-center">
         <q-avatar size="128px">
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -30,78 +30,87 @@
       </div>
     </div>
 
+    <div class="text-center text-h5" v-else>همچین دانش آموزی وجود ندارد</div>
+
     <!-- vorodie etelaate delkhah va jadid baraye danesh amoza -->
+    <div v-if="student.length != 0">
+      <div class="text-h5 q-my-md">ویرایش اطلاعات</div>
 
-    <div class="text-h5 q-my-md">ویرایش اطلاعات</div>
-
-    <div>
-      <q-form class="row">
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="firstName"
-          label="نام"
-        />
-
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="lastName"
-          label="نام خانوادگی"
-        />
-
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="number"
-          label="شماره تلفن"
-        />
-
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="studentId"
-          label="کدملی"
-        />
-
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="serialCode"
-          label="سریال شناسنامه"
-        />
-
-        <q-input
-          class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
-          filled
-          v-model="classRoom"
-          label="کلاس دانش آموز"
-        />
-
-        <!-- taghir dadane etelaate danesh amoz ba tavajoh be vorodi ha -->
-
-        <div>
-          <q-btn
-            class="q-mx-md"
-            label="ویرایش"
-            type="submit"
-            color="primary"
-            icon-right="edit"
-            @click="EditStudent"
+      <div>
+        <q-form class="row">
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="firstName"
+            label="نام"
+            :rules="[(val) => !!val || 'نام دانش آموز اجباری است']"
           />
 
-          <!-- hazfe danesh amoz -->
-
-          <q-btn
-            class="q-mx-md"
-            color="red-5"
-            unelevated
-            @click="RemoveClass"
-            icon-right="delete"
-            label="حذف دانش آموز"
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="lastName"
+            label="نام خانوادگی"
+            :rules="[(val) => !!val || 'نام خانوادگی دانش آموز اجباری است']"
           />
-        </div>
-      </q-form>
+
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="number"
+            label="شماره تلفن"
+            :rules="[(val) => !!val || 'شماره تلفن دانش آموز اجباری است']"
+          />
+
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="studentId"
+            label="کدملی"
+            :rules="[(val) => !!val || 'کد ملی دانش آموز اجباری است']"
+          />
+
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="serialCode"
+            label="سریال شناسنامه"
+            :rules="[(val) => !!val || 'سریال شناسنامه دانش آموز اجباری است']"
+          />
+
+          <q-input
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            filled
+            v-model="classRoom"
+            label="کلاس دانش آموز"
+            :rules="[(val) => !!val || 'کلاس دانش آموز اجباری است']"
+          />
+
+          <!-- taghir dadane etelaate danesh amoz ba tavajoh be vorodi ha -->
+
+          <div>
+            <q-btn
+              class="q-mx-md q-my-md"
+              label="ویرایش"
+              type="submit"
+              color="primary"
+              icon-right="edit"
+              @click="EditStudent"
+            />
+
+            <!-- hazfe danesh amoz -->
+
+            <q-btn
+              class="q-mx-md"
+              color="red-5"
+              unelevated
+              @click="RemoveClass"
+              icon-right="delete"
+              label="حذف دانش آموز"
+            />
+          </div>
+        </q-form>
+      </div>
     </div>
   </q-page>
 </template>

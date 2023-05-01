@@ -63,7 +63,7 @@
 
     <q-dialog v-model="addClass">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 325px">
+        <q-card square class="shadow-24" style="width: 300px; height: 350px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن کلاس</h4>
             <div
@@ -77,8 +77,10 @@
                 square
                 clearable
                 v-model.number="classId"
-                label="نام"
+                label="کد کلاس"
                 autofocus
+                :rules="[(val) => !!val || 'کد کلاس لازم است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="badge" />
@@ -135,10 +137,7 @@
           align="left"
           :label="'کلاس' + classInfo.class_id"
         >
-          <q-card
-            flat
-            bordered
-          >
+          <q-card flat bordered>
             <q-markup-table>
               <thead>
                 <tr>
@@ -149,8 +148,9 @@
                 </tr>
               </thead>
               <tbody
-              v-for="(student, index) in classInfo.students"
-              :key="'classInfo-' + index + 1">
+                v-for="(student, index) in classInfo.students"
+                :key="'classInfo-' + index + 1"
+              >
                 <tr>
                   <td class="text-left">
                     {{ student.full_name }}

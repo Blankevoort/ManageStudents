@@ -20,7 +20,7 @@
 
       <q-dialog v-model="addClass">
         <div class="row">
-          <q-card square class="shadow-24" style="width: 300px; height: 325px">
+          <q-card square class="shadow-24" style="width: 300px; height: 350px">
             <q-card-section class="bg-primary">
               <h4 class="text-h5 text-white q-my-md">افزودن کلاس</h4>
               <div
@@ -34,8 +34,10 @@
                   square
                   clearable
                   v-model.number="classId"
-                  label="نام"
+                  label="کد کلاس"
                   autofocus
+                  :rules="[(val) => !!val || 'کد کلاس لازم است']"
+                  type="number"
                 >
                   <template v-slot:prepend>
                     <q-icon name="badge" />

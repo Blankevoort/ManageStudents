@@ -32,7 +32,7 @@
 
     <q-dialog v-model="addStudent">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 575px">
+        <q-card square class="shadow-24" style="width: 300px; height: 675px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
             <div
@@ -48,6 +48,7 @@
                 v-model="first_name"
                 label="نام"
                 autofocus
+                :rules="[(val) => !!val || 'نام دانش آموز اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="person" />
@@ -59,6 +60,7 @@
                 v-model="last_name"
                 label="نام خانوادگی"
                 autofocus
+                :rules="[(val) => !!val || 'نام خانوادگی دانش آموز اجباری است']"
               >
                 <template v-slot:prepend>
                   <q-icon name="groups" />
@@ -68,6 +70,8 @@
                 v-model="number"
                 style="max-width: 300px"
                 label="شماره دانش آموز"
+                :rules="[(val) => !!val || 'شماره تلفن دانش آموز اجباری است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="phone" />
@@ -77,6 +81,10 @@
                 v-model="serialCode"
                 style="max-width: 300px"
                 label="سریال شناسنامه"
+                :rules="[
+                  (val) => !!val || 'سریال شناسنامه دانش آموز اجباری است',
+                ]"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="sort" />
@@ -86,6 +94,8 @@
                 v-model="studentId"
                 style="max-width: 300px"
                 label="کدملی"
+                :rules="[(val) => !!val || 'کد ملی دانش آموز اجباری است']"
+                type="number"
               >
                 <template v-slot:prepend>
                   <q-icon name="mail_lock" />
@@ -108,36 +118,40 @@
     </q-dialog>
 
     <!-- neshon dadane list danesh amozan -->
-
-    <q-list
-      v-for="(student, index) in Students"
-      :key="'classInfo-' + index + 1"
-    >
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        :to="'/student/' + student.id"
+    <div v-if="Students.length != 0">
+      <q-list
+        v-for="(student, index) in Students"
+        :key="'classInfo-' + index + 1"
       >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >{{ student.full_name }}
-          <q-item-label caption
-            >شماره تلفن: {{ student.number }}</q-item-label
-          ></q-item-section
+        <q-item
+          class="col-12 q-my-sm full-width"
+          clickable
+          v-ripple
+          :to="'/student/' + student.id"
         >
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="more_vert" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-      <q-separator class="q-my-md" />
-    </q-list>
+          <q-item-section avatar>
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section
+            >{{ student.full_name }}
+            <q-item-label caption
+              >شماره تلفن: {{ student.number }}</q-item-label
+            ></q-item-section
+          >
+          <q-item-section side>
+            <q-item-label>
+              <q-btn flat dense round icon="more_vert" to="student"></q-btn>
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator class="q-my-md" />
+      </q-list>
+    </div>
+    <div class="text-center text-h5" v-else>
+      دانش آموزی در این کلاس وجود ندارد
+    </div>
   </q-page>
 </template>
 
