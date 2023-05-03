@@ -3,7 +3,7 @@
   <q-page class="q-pa-md">
     <!-- neshan dadane etelaate danesh amoz -->
 
-    <div v-if="student.length != 0">
+    <div>
       <div class="flex justify-center">
         <q-avatar size="128px">
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -29,8 +29,6 @@
         </div>
       </div>
     </div>
-
-    <div class="text-center text-h5" v-else>همچین دانش آموزی وجود ندارد</div>
 
     <!-- vorodie etelaate delkhah va jadid baraye danesh amoza -->
     <div v-if="student.length != 0">
@@ -188,6 +186,11 @@ export default {
         })
         .then((r) => {
           student.value = r.data;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $router.push("/404");
+          }
         });
     }
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone

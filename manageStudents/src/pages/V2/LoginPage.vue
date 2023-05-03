@@ -16,6 +16,7 @@
             v-model="username"
             label="نام کاربری خود را وارد کنید"
             style="width: 350px; height: 68px"
+            :rules="[(val) => !!val || 'نام کاربری اجباری است']"
           >
             <template v-slot:append> <q-icon name="person" /> </template
           ></q-input>
@@ -28,6 +29,8 @@
             v-model="password"
             label="رمز عبور خود را وارد کنید"
             style="width: 350px; height: 68px"
+            type="password"
+            :rules="[(val) => !!val || 'رمز عبور اجباری است']"
           >
             <template v-slot:append> <q-icon name="key" /> </template
           ></q-input>

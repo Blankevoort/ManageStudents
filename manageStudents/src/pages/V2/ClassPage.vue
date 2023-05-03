@@ -230,6 +230,11 @@ export default {
         .then((r) => {
           Class.value = r.data;
           Students.value = r.data.students;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $router.push("/404");
+          }
         });
     }
 
