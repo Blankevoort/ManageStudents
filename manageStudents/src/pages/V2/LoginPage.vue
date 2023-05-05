@@ -25,13 +25,18 @@
         <div class="q-mt-md full-width">
           <div class="q-my-md" style="font-size: 18px">رمز ورود</div>
           <q-input
-            filled
             v-model="password"
-            label="رمز عبور خود را وارد کنید"
-            style="width: 350px; height: 68px"
+            filled
+            :type="isPwd ? 'password' : 'text'"
           >
-            <template v-slot:append> <q-icon name="key" /> </template
-          ></q-input>
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
         </div>
 
         <!-- dokmeie vorode karkonan -->
@@ -247,6 +252,7 @@ export default {
       username,
       password,
       error,
+      isPwd: ref(true),
       Login,
     };
   },

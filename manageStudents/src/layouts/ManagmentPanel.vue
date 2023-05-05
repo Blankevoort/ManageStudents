@@ -8,14 +8,13 @@
       "
     >
       <q-toolbar>
-
         <q-toolbar-title>
           <q-btn flat to="/">
-          <q-avatar>
-            <img src="/MainImages/logo.png" />
-          </q-avatar>
-          <span class="q-px-sm text-h5">شهدای منا</span>
-        </q-btn>
+            <q-avatar>
+              <img src="/MainImages/logo.png" />
+            </q-avatar>
+            <span class="q-px-sm text-h5">شهدای منا</span>
+          </q-btn>
         </q-toolbar-title>
 
         <q-toggle
@@ -53,7 +52,10 @@
             style="width: 85px; height: 85px"
           />
         </q-avatar>
-        <div class="col-12 text-center q-mt-md">{{ user.username }}</div>
+        <div class="col-12 text-center q-mt-md">
+          <q-badge class="q-mx-sm" rounded color="green" align="middle" />
+          {{ user.username }}
+        </div>
       </div>
 
       <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
@@ -240,3 +242,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#q-app > div > div.q-drawer-container > aside > div > div.q-my-md.row > div.col-12.text-center.q-mt-md > div {
+  margin-bottom: 6px;
+}
+</style>
