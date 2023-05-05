@@ -17,7 +17,7 @@
 
     <q-dialog v-model="addStudent">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 700px">
+        <q-card square class="shadow-24" style="width: 300px; height: 725px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
             <div
@@ -99,6 +99,7 @@
               </q-input>
             </q-form>
           </q-card-section>
+
           <q-card-actions class="q-px-lg flex justify-center">
             <q-btn
               unelevated
@@ -108,6 +109,13 @@
               label="افزودن"
               @click="AddNewStudent()"
             />
+            <div
+              class="text-negative text-center q-my-sm"
+              v-for="err in error"
+              :key="err"
+            >
+              {{ err }}
+            </div>
           </q-card-actions>
         </q-card>
       </div>
@@ -173,6 +181,7 @@ export default {
     const $q = useQuasar();
     const Students = ref([]);
     const addStudent = ref(false);
+    const error = ref();
 
     const first_name = ref();
     const last_name = ref();
@@ -203,6 +212,9 @@ export default {
         .then((r) => {
           addStudent.value = false;
           location.reload();
+        })
+        .catch((err) => {
+          error.value = err.response.data;
         });
     }
 
@@ -238,6 +250,7 @@ export default {
       studentId,
       class_room,
       Students,
+      error,
       addStudent,
       AddNewStudent,
     };

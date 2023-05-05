@@ -89,6 +89,14 @@
           <!-- taghir dadane etelaate danesh amoz ba tavajoh be vorodi ha -->
 
           <div>
+            <div
+              class="text-negative text-center q-my-sm"
+              v-for="err in error"
+              :key="err"
+            >
+              {{ err }}
+            </div>
+
             <q-btn
               class="q-mx-md q-my-md"
               label="ویرایش"
@@ -131,6 +139,7 @@ export default {
     const $route = useRoute();
     const $router = useRouter();
     const student = ref([]);
+    const error = ref();
 
     const firstName = ref();
     const lastName = ref();
@@ -188,6 +197,11 @@ export default {
         })
         .then((r) => {
           student.value = r.data;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $router.push("/404");
+          }
         });
     }
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
@@ -209,6 +223,7 @@ export default {
       EditStudent,
       RemoveClass,
       classRoom,
+      error,
     };
   },
 };

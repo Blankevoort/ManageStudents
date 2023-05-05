@@ -32,7 +32,7 @@
 
     <q-dialog v-model="addStudent">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 675px">
+        <q-card square class="shadow-24" style="width: 300px; height: 660px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
             <div
@@ -112,6 +112,13 @@
               label="افزودن"
               @click="AddNewStudent()"
             />
+            <div
+              class="text-negative text-center q-my-sm"
+              v-for="err in error"
+              :key="err"
+            >
+              {{ err }}
+            </div>
           </q-card-actions>
         </q-card>
       </div>
@@ -172,6 +179,7 @@ export default {
     const Students = ref([]);
     const addStudent = ref(false);
     const Class = ref([]);
+    const error = ref();
 
     const first_name = ref();
     const last_name = ref();
@@ -215,6 +223,9 @@ export default {
         .then((r) => {
           addStudent.value = false;
           location.reload();
+        })
+        .catch((err) => {
+          error.value = err.response.data;
         });
     }
 
@@ -230,6 +241,11 @@ export default {
         .then((r) => {
           Class.value = r.data;
           Students.value = r.data.students;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            $router.push("/404");
+          }
         });
     }
 
@@ -250,6 +266,7 @@ export default {
       serialCode,
       studentId,
       addStudent,
+      error,
       Students,
       RemoveClass,
       AddNewStudent,

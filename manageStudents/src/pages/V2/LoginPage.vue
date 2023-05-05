@@ -11,11 +11,14 @@
         <div class="q-mt-xl full-width">
           <div class="q-my-md" style="font-size: 18px">نام کاربری</div>
           <q-input
+            autofocus
             class="text-wieght-bold"
             filled
             v-model="username"
             label="نام کاربری خود را وارد کنید"
             style="width: 350px; height: 68px"
+            :rules="[(val) => !!val || ' نام کاربری اجباری است']"
+            type="text"
           >
             <template v-slot:append> <q-icon name="person" /> </template
           ></q-input>
@@ -28,6 +31,8 @@
             v-model="password"
             label="رمز عبور خود را وارد کنید"
             style="width: 350px; height: 68px"
+            :rules="[(val) => !!val || ' رمز عبور اجباری است']"
+            type="password"
           >
             <template v-slot:append> <q-icon name="key" /> </template
           ></q-input>
@@ -41,7 +46,15 @@
             type="submit"
             color="primary"
             style="width: 350px; height: 55px; font-size: 22px"
+            @click="Login"
           />
+        </div>
+        <div
+          class="text-negative text-center q-my-md"
+          v-for="err in error"
+          :key="err"
+        >
+          {{ err }}
         </div>
       </q-form>
     </div>
@@ -209,6 +222,8 @@ export default {
     const username = ref();
     const password = ref();
 
+    const error = ref();
+
     // Tarife dastorat
 
     // dastore vorod be panel
@@ -224,6 +239,9 @@ export default {
             $q.cookies.set("token", r.data.auth_token);
             $router.push("/");
           }
+        })
+        .catch((err) => {
+          error.value = err.response.data.non_field_errors;
         });
     }
 
@@ -232,6 +250,7 @@ export default {
     return {
       username,
       password,
+      error,
       Login,
     };
   },

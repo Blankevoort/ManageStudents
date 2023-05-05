@@ -4,14 +4,14 @@
       class="bg-primary flex justify-between content-center align-center"
     >
       <q-toolbar>
-          <q-toolbar-title>
-            <q-btn flat to="/">
+        <q-toolbar-title>
+          <q-btn flat to="/">
             <q-avatar>
               <img src="/MainImages/logo.png" />
             </q-avatar>
             <span class="q-px-sm text-h5">شهدای منا</span>
           </q-btn>
-          </q-toolbar-title>
+        </q-toolbar-title>
 
         <q-toggle
           v-model="darkMode"

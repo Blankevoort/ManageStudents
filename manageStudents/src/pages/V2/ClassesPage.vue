@@ -20,7 +20,7 @@
 
       <q-dialog v-model="addClass">
         <div class="row">
-          <q-card square class="shadow-24" style="width: 300px; height: 350px">
+          <q-card square class="shadow-24" style="width: 300px; height: 356px">
             <q-card-section class="bg-primary">
               <h4 class="text-h5 text-white q-my-md">افزودن کلاس</h4>
               <div
@@ -54,6 +54,13 @@
                 label="افزودن"
                 @click="AddNewClass()"
               />
+              <div
+                class="text-negative text-center q-my-sm"
+                v-for="err in error"
+                :key="err"
+              >
+                {{ err }}
+              </div>
             </q-card-actions>
           </q-card>
         </div>
@@ -95,6 +102,7 @@ export default {
     const Classes = ref();
     const addClass = ref(false);
     const classId = ref();
+    const error = ref();
 
     const $q = useQuasar();
 
@@ -115,6 +123,9 @@ export default {
         .then((r) => {
           addClass.value = false;
           location.reload();
+        })
+        .catch((err) => {
+          error.value = err.response.data.class_id;
         });
     }
 
@@ -140,6 +151,7 @@ export default {
     // tarife zarf ha va dastorat
 
     return {
+      error,
       classId,
       Classes,
       addClass,
