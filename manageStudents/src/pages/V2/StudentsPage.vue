@@ -17,7 +17,7 @@
 
     <q-dialog v-model="addStudent">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 725px">
+        <q-card square class="shadow-24" style="width: 300px; height: 738px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن دانش آموز</h4>
             <div
@@ -109,12 +109,8 @@
               label="افزودن"
               @click="AddNewStudent()"
             />
-            <div
-              class="text-negative text-center q-my-sm"
-              v-for="err in error"
-              :key="err"
-            >
-              {{ err }}
+            <div class="text-negative text-center q-my-sm">
+              {{ error }}
             </div>
           </q-card-actions>
         </q-card>
@@ -214,7 +210,9 @@ export default {
           location.reload();
         })
         .catch((err) => {
-          error.value = err.response.data;
+          if ((err.response.status = 400)) {
+            error.value = "تمام فرم هارا پر کنید";
+          }
         });
     }
 

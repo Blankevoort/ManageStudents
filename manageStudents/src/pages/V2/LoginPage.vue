@@ -14,7 +14,8 @@
             autofocus
             class="text-wieght-bold"
             filled
-            v-model="username"
+            :rules="[(val) => !!val || 'نام کاربری اجباری است']"
+            v-model="identity"
             label="نام کاربری خود را وارد کنید"
             style="width: 350px; height: 68px"
           >
@@ -27,6 +28,7 @@
           <q-input
             v-model="password"
             filled
+            :rules="[(val) => !!val || 'رمز عبور اجباری است']"
             :type="isPwd ? 'password' : 'text'"
           >
             <template v-slot:append>
@@ -50,12 +52,8 @@
             @click="Login"
           />
         </div>
-        <div
-          class="text-negative text-center q-my-md"
-          v-for="err in error"
-          :key="err"
-        >
-          {{ err }}
+        <div class="text-negative text-center q-mt-md">
+          {{ error }}
         </div>
       </q-form>
     </div>
@@ -220,7 +218,7 @@ export default {
     const $q = useQuasar();
     const $router = useRouter();
 
-    const username = ref();
+    const identity = ref();
     const password = ref();
 
     const error = ref();
@@ -232,7 +230,7 @@ export default {
     function Login() {
       api
         .post("auth/token/login/", {
-          username: username.value,
+          identity: identity.value,
           password: password.value,
         })
         .then((r) => {
@@ -242,14 +240,16 @@ export default {
           }
         })
         .catch((err) => {
-          error.value = err.response.data.non_field_errors;
+          if ((err.response.status = 400)) {
+            error.value = "با اطلاعات وارد شده نمیتوان وارد شد";
+          }
         });
     }
 
     // tarife zarf ha va dastorat
 
     return {
-      username,
+      identity,
       password,
       error,
       isPwd: ref(true),

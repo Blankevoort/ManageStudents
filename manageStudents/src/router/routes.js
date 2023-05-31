@@ -16,7 +16,10 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/DashboardPage.vue") },
     ],
     meta: {
-      RoleAll: true,
+      requireAuth: true,
+      headmasterAccess: true,
+      deputyAccess: true,
+      teacherAccess: true,
     },
   },
   {
@@ -26,7 +29,10 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/ClassesPage.vue") },
     ],
     meta: {
-      RoleAll: true,
+      requireAuth: true,
+      teacherAccess: true,
+      deputyAccess: true,
+      headmasterAccess: true,
     },
   },
   {
@@ -36,8 +42,9 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/StudentsPage.vue") },
     ],
     meta: {
-      RoleHeadMaster: true,
-      RoleDeputy: true,
+      requireAuth: true,
+      headmasterAccess: true,
+      deputyAccess: true,
     },
   },
   {
@@ -47,8 +54,10 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/ClassPage.vue") },
     ],
     meta: {
-      RoleHeadMaster: true,
-      RoleDeputy: true,
+      requireAuth: true,
+      teacherAccess: true,
+      deputyAccess: true,
+      headmasterAccess: true,
     },
   },
   {
@@ -58,8 +67,9 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/StudentPage.vue") },
     ],
     meta: {
-      RoleHeadMaster: true,
-      RoleDeputy: true,
+      requireAuth: true,
+      headmasterAccess: true,
+      deputyAccess: true,
     },
   },
   {
@@ -69,7 +79,9 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/UsersPage.vue") },
     ],
     meta: {
-      RoleHeadMaster: true,
+      requireAuth: true,
+      headmasterAccess: true,
+      deputyAccess: true,
     },
   },
   {

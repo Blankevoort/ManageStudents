@@ -1,5 +1,5 @@
 import { Cookies } from "quasar";
-import { api } from "src/boot/axios";
+import { checkAccess } from "./middleware";
 import { route } from "quasar/wrappers";
 import {
   createRouter,
@@ -23,52 +23,9 @@ export default route(function () {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  const checkHeadMaster = (to, from, next) => {
-    const user = api
-      .get("auth/users/me/", {
-        headers: {
-          Authorization: "Token " + Cookies.get("token"),
-        },
-      })
-      .then((r) => {
-        if (r.data.type_display == "HeadMaster") {
-          next();
-        }
-      });
-  };
-
   Router.beforeEach((to, from, next) => {
-    if (to.meta.RoleAll) {
-      if (Cookies.get("token")) {
-        next();
-      } else if(to.meta.RoleHeadMaster) {
-        if (to.matched.some((record) => record.meta.RoleHeadMaster)) {
-          checkHeadMaster(to, from, next);
-        } else {
-          next();
-        }
-      } else {
-        next({
-          path: "/login",
-          query: {
-            redirect: to.fullPath,
-          },
-        });
-      }
-    } else if (to.meta.login) {
-      if (Cookies.get("token")) {
-        next({
-          path: "/",
-          query: {
-            redirect: to.fullPath,
-          },
-        });
-      } else {
-        next();
-      }
-    } else {
-      next();
-    }
+    checkAccess(to, from, next);
   });
+
   return Router;
 });

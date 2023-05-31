@@ -54,7 +54,7 @@
         </q-avatar>
         <div class="col-12 text-center q-mt-md">
           <q-badge class="q-mx-sm" rounded color="green" align="middle" />
-          {{ user.username }}
+          {{ user.identity }}
         </div>
       </div>
 
@@ -244,7 +244,14 @@ export default {
 </script>
 
 <style>
-#q-app > div > div.q-drawer-container > aside > div > div.q-my-md.row > div.col-12.text-center.q-mt-md > div {
+#q-app
+  > div
+  > div.q-drawer-container
+  > aside
+  > div
+  > div.q-my-md.row
+  > div.col-12.text-center.q-mt-md
+  > div {
   margin-bottom: 6px;
 }
 </style>

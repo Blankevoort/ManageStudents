@@ -87,7 +87,10 @@
             <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
           </q-avatar>
         </q-item-section>
-        <q-item-section>{{ user.username }} </q-item-section>
+        <q-item-section
+          >{{ user.identity }}
+          <q-item-label caption>نقش: {{ user.type }}</q-item-label>
+        </q-item-section>
         <q-item-section @click="RemoveUser(index)" side>
           <q-item-label>
             <q-btn color="red-5" unelevated>
@@ -118,6 +121,7 @@ export default {
     // tarife zard haye morede niaz
 
     const $q = useQuasar();
+    const user = ref();
     const Users = ref([]);
     const addUser = ref(false);
     const error = ref();
@@ -176,12 +180,30 @@ export default {
         });
     }
 
+    // Gereftane User as backend
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
     onBeforeMount(() => {
       // dastore gereftane karkonan
 
       getUsers();
+
+      // Gereftane User as backend
+
+      getUser();
     });
 
     // tarife zarf ha va dastorat
@@ -192,6 +214,7 @@ export default {
       addUser,
       Users,
       error,
+      user,
       AddNewUser,
       RemoveUser,
     };

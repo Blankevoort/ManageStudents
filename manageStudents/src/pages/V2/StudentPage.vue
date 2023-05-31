@@ -16,7 +16,7 @@
         <div
           class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm text-h6"
         >
-          نام و نام خانوادگی: {{ student.full_name }}
+          {{ student.full_name }}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
           شماره سریال شناسنامه: {{ student.serial_code }}
@@ -26,6 +26,15 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
           شماره کلاس: {{ student.class_room }}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          وضعیت دانش آموز:
+          <q-avatar
+            class="q-mx-sm"
+            style="margin-bottom: 5px"
+            size="16px"
+            :color="student.discipline"
+          />
         </div>
       </div>
     </div>

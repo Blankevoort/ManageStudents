@@ -97,12 +97,8 @@
               label="افزودن"
               @click="AddNewClass()"
             />
-            <div
-              class="text-negative text-center q-my-sm"
-              v-for="err in error"
-              :key="err"
-            >
-              {{ err }}
+            <div class="text-negative text-center q-my-sm">
+              {{ error }}
             </div>
           </q-card-actions>
         </q-card>
@@ -218,7 +214,11 @@ export default {
           location.reload();
         })
         .catch((err) => {
-          error.value = err.response.data.class_id;
+          if ((err.response.status = 400)) {
+            error.value = "این کلاس از قبل وجود دارد";
+          } else if ((err.response.status = 403)) {
+            error.value = "تمام فرم هارا پر کنید";
+          }
         });
     }
 
