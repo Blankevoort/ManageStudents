@@ -83,6 +83,7 @@
             v-model="serialCode"
             label="سریال شناسنامه"
             :rules="[(val) => !!val || 'سریال شناسنامه دانش آموز اجباری است']"
+            mask="#####-#"
           />
 
           <q-input
@@ -93,17 +94,18 @@
             :rules="[(val) => !!val || 'کلاس دانش آموز اجباری است']"
           />
 
+          <q-select
+            class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+            v-model="discipline"
+            label="Select Color"
+            :options="colorOptions"
+            filled
+            emit-value
+          ></q-select>
+
           <!-- taghir dadane etelaate danesh amoz ba tavajoh be vorodi ha -->
 
-          <div>
-            <div
-              class="text-negative text-center q-my-sm"
-              v-for="err in error"
-              :key="err"
-            >
-              {{ err }}
-            </div>
-
+          <div class="col-12 q-pa-md">
             <q-btn
               class="q-mx-md q-my-md"
               label="ویرایش"
@@ -125,6 +127,10 @@
             />
           </div>
         </q-form>
+      </div>
+
+      <div class="text-red-5 text-center q-mt-md">
+        {{ error }}
       </div>
     </div>
   </q-page>
@@ -154,6 +160,13 @@ export default {
     const serialCode = ref();
     const studentId = ref();
     const classRoom = ref();
+    const discipline = ref();
+    const colorOptions = [
+      { label: "Green", value: "green" },
+      { label: "White", value: "white" },
+      { label: "Yellow", value: "yellow" },
+      { label: "Red", value: "red" },
+    ];
 
     // Tarife dastorat
 
@@ -181,6 +194,7 @@ export default {
         serial_code: serialCode.value,
         student_id: studentId.value,
         class_room: classRoom.value,
+        discipline: discipline.value,
       };
       api
         .patch("students/" + student.value.id + "/", data, {
@@ -189,7 +203,24 @@ export default {
           },
         })
         .then((r) => {
-          location.reload();
+          getStudent();
+        })
+        .catch((err) => {
+          if (err.response) {
+            if (err.response.status === 400) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 401) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 403) {
+              error.value = "دسترسی غیرمجاز.";
+            } else {
+              error.value = "خطای سمت سرور: درخواست نامعتبر.";
+            }
+          } else if (err.request) {
+            error.value = "خطای سمت سرور: درخواست ارسال نشد.";
+          } else {
+            error.value = "خطای سمت سرور: خطای نامشخص رخ داد.";
+          }
         });
     }
 
@@ -225,12 +256,14 @@ export default {
       lastName,
       firstName,
       number,
+      discipline,
       serialCode,
       studentId,
       EditStudent,
       RemoveClass,
       classRoom,
       error,
+      colorOptions,
     };
   },
 };

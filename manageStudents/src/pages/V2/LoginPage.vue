@@ -52,7 +52,7 @@
             @click="Login"
           />
         </div>
-        <div class="text-negative text-center q-mt-md">
+        <div class="text-red-5 text-center q-mt-md">
           {{ error }}
         </div>
       </q-form>
@@ -240,8 +240,20 @@ export default {
           }
         })
         .catch((err) => {
-          if ((err.response.status = 400)) {
-            error.value = "با اطلاعات وارد شده نمیتوان وارد شد";
+          if (err.response) {
+            if (err.response.status === 400) {
+              error.value = "با اطلاعات وارد شده نمیتوان وارد شد.";
+            } else if (err.response.status === 401) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 403) {
+              error.value = "دسترسی غیرمجاز.";
+            } else {
+              error.value = "خطای سمت سرور: درخواست نامعتبر.";
+            }
+          } else if (err.request) {
+            error.value = "خطای سمت سرور: درخواست ارسال نشد.";
+          } else {
+            error.value = "خطای سمت سرور: خطای نامشخص رخ داد.";
           }
         });
     }

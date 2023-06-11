@@ -53,7 +53,7 @@
           />
         </q-avatar>
         <div class="col-12 text-center q-mt-md">
-          <q-badge class="q-mx-sm" rounded color="green" align="middle" />
+          <!-- <q-badge class="q-mx-sm" rounded color="green" align="middle" /> -->
           {{ user.identity }}
         </div>
       </div>

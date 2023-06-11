@@ -54,12 +54,8 @@
                 label="افزودن"
                 @click="AddNewClass()"
               />
-              <div
-                class="text-negative text-center q-my-sm"
-                v-for="err in error"
-                :key="err"
-              >
-                {{ err }}
+              <div class="text-red-5 text-center q-mt-md">
+                {{ error }}
               </div>
             </q-card-actions>
           </q-card>
@@ -99,10 +95,10 @@ import { useQuasar, Cookies } from "quasar";
 export default {
   setup() {
     // tarife zard haye morede niaz
-    const Classes = ref();
+    const Classes = ref([]);
     const addClass = ref(false);
     const classId = ref();
-    const error = ref();
+    const error = ref("");
 
     const $q = useQuasar();
 
@@ -122,10 +118,24 @@ export default {
         })
         .then((r) => {
           addClass.value = false;
-          location.reload();
+          getClasses();
         })
         .catch((err) => {
-          error.value = err.response.data.class_id;
+          if (err.response) {
+            if (err.response.status === 400) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 401) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 403) {
+              error.value = "دسترسی غیرمجاز.";
+            } else {
+              error.value = "خطای سمت سرور: درخواست نامعتبر.";
+            }
+          } else if (err.request) {
+            error.value = "خطای سمت سرور: درخواست ارسال نشد.";
+          } else {
+            error.value = "خطای سمت سرور: خطای نامشخص رخ داد.";
+          }
         });
     }
 

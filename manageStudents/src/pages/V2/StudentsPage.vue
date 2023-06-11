@@ -70,6 +70,7 @@
                   (val) => !!val || 'سریال شناسنامه دانش آموز اجباری است',
                 ]"
                 type="number"
+                mask="#####-#"
               >
                 <template v-slot:prepend>
                   <q-icon name="sort" />
@@ -109,7 +110,7 @@
               label="افزودن"
               @click="AddNewStudent()"
             />
-            <div class="text-negative text-center q-my-sm">
+            <div class="text-red-5 text-center q-mt-md">
               {{ error }}
             </div>
           </q-card-actions>
@@ -207,11 +208,23 @@ export default {
         })
         .then((r) => {
           addStudent.value = false;
-          location.reload();
+          getStudents();
         })
         .catch((err) => {
-          if ((err.response.status = 400)) {
-            error.value = "تمام فرم هارا پر کنید";
+          if (err.response) {
+            if (err.response.status === 400) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 401) {
+              error.value = "اطلاعات وارد شده معتبر نیستند.";
+            } else if (err.response.status === 403) {
+              error.value = "دسترسی غیرمجاز.";
+            } else {
+              error.value = "خطای سمت سرور: درخواست نامعتبر.";
+            }
+          } else if (err.request) {
+            error.value = "خطای سمت سرور: درخواست ارسال نشد.";
+          } else {
+            error.value = "خطای سمت سرور: خطای نامشخص رخ داد.";
           }
         });
     }
