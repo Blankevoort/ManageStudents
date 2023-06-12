@@ -61,7 +61,7 @@
 
     <!-- pop up baraye vared kardane etelaate class -->
 
-    <q-dialog v-model="addClass">
+    <q-dialog v-model="addClass" v-if="user.type != 'معلم'">
       <div class="row">
         <q-card square class="shadow-24" style="width: 300px; height: 356px">
           <q-card-section class="bg-primary">
@@ -127,6 +127,7 @@
           icon="add"
           label="افزودن کلاس"
           @click="addClass = true"
+          v-if="user.type != 'معلم'"
         />
       </div>
 
@@ -194,6 +195,7 @@ export default {
     const addClass = ref(false);
     const Class = ref([]);
     const error = ref();
+    const user = ref([]);
 
     // Tarife dastorat
 
@@ -246,16 +248,34 @@ export default {
           Class.value = r.data.classes;
         });
     }
+
+    // Gereftane User as backend
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
     onBeforeMount(() => {
       // gereftane data haye morede niaz baraye in safhe
       getData();
+
+      getUser();
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      user,
       classId,
       dashboard,
       Class,

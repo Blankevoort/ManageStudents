@@ -13,12 +13,13 @@
           icon="add"
           label="افزودن کلاس"
           @click="addClass = true"
+          v-if="user.type != 'معلم'"
         />
       </div>
 
       <!-- pop up baraye afzodane class jadid -->
 
-      <q-dialog v-model="addClass">
+      <q-dialog v-model="addClass" v-if="user.type != 'معلم'">
         <div class="row">
           <q-card square class="shadow-24" style="width: 300px; height: 356px">
             <q-card-section class="bg-primary">
@@ -99,6 +100,7 @@ export default {
     const addClass = ref(false);
     const classId = ref();
     const error = ref("");
+    const user = ref([]);
 
     const $q = useQuasar();
 
@@ -152,15 +154,33 @@ export default {
           Classes.value = r.data;
         });
     }
+
+    // Gereftane User as backend
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
     onBeforeMount(() => {
       // gereftane class ha
       getClasses();
+
+      getUser();
     });
     // tarife zarf ha va dastorat
 
     return {
+      user,
       error,
       classId,
       Classes,

@@ -12,6 +12,7 @@
         color="red-5"
         unelevated
         @click="RemoveClass"
+        v-if="user.type != 'معلم'"
       >
         <q-icon left size="2em" name="delete" />
         <div>حذف کلاس</div>
@@ -25,12 +26,13 @@
         icon="add"
         label="افزودن دانش آموز"
         @click="addStudent = true"
+        v-if="user.type != 'معلم'"
       />
     </div>
 
     <!-- pop up baraye afzodane danesh amoz -->
 
-    <q-dialog v-model="addStudent">
+    <q-dialog v-model="addStudent" v-if="user.type != 'معلم'">
       <div class="row">
         <q-card square class="shadow-24" style="width: 300px; height: 660px">
           <q-card-section class="bg-primary">
@@ -176,6 +178,7 @@ export default {
     const addStudent = ref(false);
     const Class = ref([]);
     const error = ref();
+    const user = ref([]);
 
     const first_name = ref();
     const last_name = ref();
@@ -259,16 +262,33 @@ export default {
         });
     }
 
+    // Gereftane User as backend
+
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+        });
+    }
+
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
     onBeforeMount(() => {
       // gereftane class baraye neshan dadane etelaate dakhele on
       getClass();
+
+      getUser();
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      user,
       Class,
       first_name,
       last_name,

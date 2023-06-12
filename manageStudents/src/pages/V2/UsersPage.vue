@@ -12,6 +12,7 @@
         icon="add"
         label="افزودن کارکن"
         @click="addUser = true"
+        v-if="user.type != 'معاون'"
       />
     </div>
 
@@ -87,7 +88,11 @@
           >{{ user.identity }}
           <q-item-label caption>نقش: {{ user.type }}</q-item-label>
         </q-item-section>
-        <q-item-section @click="RemoveUser(index)" side>
+        <q-item-section
+          @click="RemoveUser(index)"
+          side
+          v-if="user.type != 'معاون'"
+        >
           <q-item-label>
             <q-btn color="red-5" unelevated>
               <q-icon left size="2em" name="delete" />
@@ -117,7 +122,7 @@ export default {
     // tarife zard haye morede niaz
 
     const $q = useQuasar();
-    const user = ref();
+    const user = ref([]);
     const Users = ref([]);
     const addUser = ref(false);
     const error = ref();
