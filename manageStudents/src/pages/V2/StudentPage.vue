@@ -50,7 +50,6 @@
             filled
             v-model="firstName"
             label="نام"
-            :rules="[(val) => !!val || 'نام دانش آموز اجباری است']"
           />
 
           <q-input
@@ -58,7 +57,6 @@
             filled
             v-model="lastName"
             label="نام خانوادگی"
-            :rules="[(val) => !!val || 'نام خانوادگی دانش آموز اجباری است']"
           />
 
           <q-input
@@ -66,7 +64,6 @@
             filled
             v-model="number"
             label="شماره تلفن"
-            :rules="[(val) => !!val || 'شماره تلفن دانش آموز اجباری است']"
           />
 
           <q-input
@@ -74,7 +71,6 @@
             filled
             v-model="studentId"
             label="کدملی"
-            :rules="[(val) => !!val || 'کد ملی دانش آموز اجباری است']"
           />
 
           <q-input
@@ -82,7 +78,6 @@
             filled
             v-model="serialCode"
             label="سریال شناسنامه"
-            :rules="[(val) => !!val || 'سریال شناسنامه دانش آموز اجباری است']"
             mask="#####-#"
           />
 
@@ -91,7 +86,6 @@
             filled
             v-model="classRoom"
             label="کلاس دانش آموز"
-            :rules="[(val) => !!val || 'کلاس دانش آموز اجباری است']"
           />
 
           <q-select
@@ -162,10 +156,10 @@ export default {
     const classRoom = ref();
     const discipline = ref();
     const colorOptions = [
-      { label: "Green", value: "green" },
-      { label: "White", value: "white" },
-      { label: "Yellow", value: "yellow" },
-      { label: "Red", value: "red" },
+      { label: "Green", value: "G" },
+      { label: "White", value: "W" },
+      { label: "Yellow", value: "Y" },
+      { label: "Red", value: "R" },
     ];
 
     // Tarife dastorat
