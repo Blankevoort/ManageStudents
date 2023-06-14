@@ -30,6 +30,53 @@
       />
     </div>
 
+    <div class="q-my-xl">
+      <q-card flat bordered>
+        <q-markup-table>
+          <thead>
+            <tr>
+              <th class="text-left text-grey-6">روز</th>
+              <th class="text-right text-grey-6">زنگ اول</th>
+              <th class="text-right text-grey-6">زنگ دوم</th>
+              <th class="text-right text-grey-6">زنگ سوم</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left text-grey-6">شنبه</td>
+              <td class="text-right">{{ Schedule.monday[0].lesson_name }}</td>
+              <td class="text-right">{{ Schedule.monday[1].lesson_name }}</td>
+              <td class="text-right">{{ Schedule.monday[2].lesson_name }}</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">یکشنبه</td>
+              <td class="text-right">علوم</td>
+              <td class="text-right">اجتماعی</td>
+              <td class="text-right">علوم/اجتماعی</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">دوشنبه</td>
+              <td class="text-right">زبان انگلیسی</td>
+              <td class="text-right">عربی</td>
+              <td class="text-right">کار و فناوری</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">سه شنبه</td>
+              <td class="text-right">ریاضی</td>
+              <td class="text-right">ورزش</td>
+              <td class="text-right">هنر</td>
+            </tr>
+            <tr>
+              <td class="text-left text-grey-6">چهارشنبه</td>
+              <td class="text-right">پیام های آسمانی</td>
+              <td class="text-right">فارسی</td>
+              <td class="text-right">نگارش</td>
+            </tr>
+          </tbody>
+        </q-markup-table>
+      </q-card>
+    </div>
+
     <!-- pop up baraye afzodane danesh amoz -->
 
     <q-dialog v-model="addStudent" v-if="user.type != 'معلم'">
@@ -179,6 +226,7 @@ export default {
     const Class = ref([]);
     const error = ref();
     const user = ref([]);
+    const Schedule = ref();
 
     const first_name = ref();
     const last_name = ref();
@@ -254,6 +302,7 @@ export default {
         .then((r) => {
           Class.value = r.data;
           Students.value = r.data.students;
+          Schedule.value = r.data.weekly_schedule;
         })
         .catch((err) => {
           if (err.response.status === 404) {
@@ -288,6 +337,7 @@ export default {
     // tarife zarf ha va dastorat
 
     return {
+      Schedule,
       user,
       Class,
       first_name,

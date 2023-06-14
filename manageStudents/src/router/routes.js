@@ -91,6 +91,13 @@ const routes = [
       { path: "", component: () => import("src/pages/V2/AboutPage.vue") },
     ],
   },
+  {
+    path: "/landing",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/V2/LandingPage.vue") },
+    ],
+  },
 
   {
     path: "/:catchAll(.*)*",

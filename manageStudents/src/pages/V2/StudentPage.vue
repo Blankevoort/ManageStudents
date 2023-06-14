@@ -40,6 +40,7 @@
     </div>
 
     <!-- vorodie etelaate delkhah va jadid baraye danesh amoza -->
+    
     <div v-if="student.length != 0">
       <div class="text-h5 q-my-md">ویرایش اطلاعات</div>
 
@@ -156,10 +157,10 @@ export default {
     const classRoom = ref();
     const discipline = ref();
     const colorOptions = [
-      { label: "Green", value: "G" },
-      { label: "White", value: "W" },
-      { label: "Yellow", value: "Y" },
-      { label: "Red", value: "R" },
+      { label: "White", value: "white" },
+      { label: "Green", value: "green" },
+      { label: "Yellow", value: "yellow" },
+      { label: "Red", value: "red" },
     ];
 
     // Tarife dastorat
