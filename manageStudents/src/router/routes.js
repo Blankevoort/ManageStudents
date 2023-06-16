@@ -10,7 +10,7 @@ const routes = [
     },
   },
   {
-    path: "/",
+    path: "/dashboard",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/DashboardPage.vue") },
@@ -92,7 +92,7 @@ const routes = [
     ],
   },
   {
-    path: "/landing",
+    path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("src/pages/V2/LandingPage.vue") },

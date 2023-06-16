@@ -65,7 +65,7 @@
 
       <!-- list baraye neshan dadane class ha va etelaate on -->
 
-      <div>
+      <div v-if="!isLoading">
         <q-list
           v-for="(classInfo, index) in Classes"
           :key="'classInfo-' + index + 1"
@@ -80,6 +80,24 @@
           </q-item>
           <q-separator />
         </q-list>
+      </div>
+
+      <div v-if="isLoading">
+        <q-skeleton height="40px" class="col-12 full-width q-my-sm" />
+
+        <q-separator />
+
+        <q-skeleton height="40px" class="col-12 full-width q-my-sm" />
+
+        <q-separator />
+
+        <q-skeleton height="40px" class="col-12 full-width q-my-sm" />
+
+        <q-separator />
+
+        <q-skeleton height="40px" class="col-12 full-width q-my-sm" />
+
+        <q-separator />
       </div>
     </div>
   </q-page>
@@ -101,6 +119,7 @@ export default {
     const classId = ref();
     const error = ref("");
     const user = ref([]);
+    const isLoading = ref(true);
 
     const $q = useQuasar();
 
@@ -176,10 +195,15 @@ export default {
       getClasses();
 
       getUser();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
     // tarife zarf ha va dastorat
 
     return {
+      isLoading,
       user,
       error,
       classId,

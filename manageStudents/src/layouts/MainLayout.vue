@@ -13,6 +13,8 @@
           </q-btn>
         </q-toolbar-title>
 
+        <q-btn v-if="!userloggedIn" flat label="ورود" to="/login" />
+        <q-btn v-else flat label="داشبورد" to="/dashboard" />
         <q-toggle
           v-model="darkMode"
           checked-icon="dark_mode"
@@ -45,6 +47,7 @@ export default {
     const dark = ref(localStorage.getItem("dark"));
 
     const user = ref([]);
+    const userloggedIn = ref(false);
 
     // function ha
 
@@ -70,12 +73,27 @@ export default {
       }
     }
 
+    function getUser() {
+      api
+        .get("auth/users/me/", {
+          headers: {
+            Authorization: "Token " + $q.cookies.get("token"),
+          },
+        })
+        .then((r) => {
+          user.value = r.data;
+          userloggedIn.value = true;
+        });
+    }
+
     onBeforeMount(() => {
+      getUser();
       checkDark();
     });
 
     return {
       user,
+      userloggedIn,
       toggleDarkMode,
       darkMode,
       dark,

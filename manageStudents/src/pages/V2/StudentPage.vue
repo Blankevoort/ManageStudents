@@ -3,7 +3,7 @@
   <q-page class="q-pa-md">
     <!-- neshan dadane etelaate danesh amoz -->
 
-    <div>
+    <div v-if="!isLoading">
       <div class="flex justify-center">
         <q-avatar size="128px">
           <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
@@ -39,8 +39,38 @@
       </div>
     </div>
 
+    <div v-if="isLoading">
+      <div class="flex justify-center">
+        <q-avatar size="128px">
+          <q-img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+        </q-avatar>
+      </div>
+      <div class="row text-center q-pt-md">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          <q-skeleton width="125px" />
+        </div>
+        <div
+          class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm text-h6"
+        >
+          <q-skeleton width="125px" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          <q-skeleton width="125px" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          <q-skeleton width="125px" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          <q-skeleton width="125px" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-4 q-py-sm">
+          <q-skeleton type="circle" size="25px" />
+        </div>
+      </div>
+    </div>
+
     <!-- vorodie etelaate delkhah va jadid baraye danesh amoza -->
-    
+
     <div v-if="student.length != 0">
       <div class="text-h5 q-my-md">ویرایش اطلاعات</div>
 
@@ -148,6 +178,7 @@ export default {
     const $router = useRouter();
     const student = ref([]);
     const error = ref();
+    const isLoading = ref(true);
 
     const firstName = ref();
     const lastName = ref();
@@ -242,11 +273,16 @@ export default {
     onBeforeMount(() => {
       // gereftane danesh amozane in class
       getStudent();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      isLoading,
       student,
       lastName,
       firstName,

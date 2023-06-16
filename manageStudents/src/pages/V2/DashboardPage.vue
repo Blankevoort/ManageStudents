@@ -2,8 +2,8 @@
   <!-- in page ba kami fasele az do samte rast o chap gharar migire -->
   <q-page class="q-mx-xl">
     <!-- Card haye balaye safhe -->
-    <div class="col-12">
-      <div class="row justify-around">
+    <div>
+      <div v-if="!isLoading" class="row justify-around">
         <q-card
           class="flex justify-around items-center align-center content-center q-mx-md q-my-md row-sm-12 col-md-4 col-lg-4 col-xl-4 bg-green-5"
           flat
@@ -53,6 +53,88 @@
             <q-card-section class="q-mt-md text-white text-center">
               <div class="text-h4">{{ dashboard.staff_count }}</div>
               <div>کارکنان</div>
+            </q-card-section>
+          </q-card-section>
+        </q-card>
+      </div>
+
+      <div class="row justify-around">
+        <!-- Sekeleton Card ha -->
+
+        <q-card
+          v-if="isLoading"
+          class="flex justify-around items-center align-center content-center q-mx-md q-my-md row-sm-12 col-md-4 col-lg-4 col-xl-4"
+          style="width: 350px; height: 150px"
+        >
+          <q-card-section horizontal>
+            <q-skeleton
+              animation="wave"
+              type="QAvatar"
+              text-color="amber-7"
+              icon="person"
+              size="128px"
+            />
+
+            <q-card-section class="q-mt-md text-white text-center">
+              <q-skeleton
+                animation="wave"
+                style="width: 125px"
+                type="text"
+                class="text-h4"
+              ></q-skeleton>
+              <q-skeleton animation="wave" style="width: 125px" type="text" />
+            </q-card-section>
+          </q-card-section>
+        </q-card>
+
+        <q-card
+          v-if="isLoading"
+          class="flex justify-around items-center align-center content-center q-mx-md q-my-md row-sm-12 col-md-4 col-lg-4 col-xl-4"
+          style="width: 350px; height: 150px"
+        >
+          <q-card-section horizontal>
+            <q-skeleton
+              animation="wave"
+              type="QAvatar"
+              text-color="amber-7"
+              icon="person"
+              size="128px"
+            />
+
+            <q-card-section class="q-mt-md text-white text-center">
+              <q-skeleton
+                animation="wave"
+                style="width: 125px"
+                type="text"
+                class="text-h4"
+              ></q-skeleton>
+              <q-skeleton animation="wave" style="width: 125px" type="text" />
+            </q-card-section>
+          </q-card-section>
+        </q-card>
+
+        <q-card
+          v-if="isLoading"
+          class="flex justify-around items-center align-center content-center q-mx-md q-my-md row-sm-12 col-md-4 col-lg-4 col-xl-4"
+          style="width: 350px; height: 150px"
+        >
+          <q-card-section horizontal>
+            <q-skeleton
+              animation="wave"
+              type="QAvatar"
+              text-color="amber-7"
+              icon="person"
+              size="128px"
+            />
+
+            <q-card-section class="q-mt-md text-white text-center">
+              <q-skeleton
+                animation="wave"
+                style="width: 125px"
+                type="text"
+                class="text-h4"
+              ></q-skeleton>
+              <q-skeleton animation="wave" style="width: 125px" type="text" />
             </q-card-section>
           </q-card-section>
         </q-card>
@@ -133,7 +215,7 @@
 
       <!-- dropdown baraye list class ha va danesh amozane dar in class -->
 
-      <div>
+      <div v-if="!isLoading">
         <q-btn-dropdown
           v-for="(classInfo, index) in Class"
           :key="'classInfo-' + index + 1"
@@ -174,13 +256,17 @@
           </q-card>
         </q-btn-dropdown>
       </div>
+
+      <div v-if="isLoading">
+        <q-skeleton height="45px" class="col-12 full-width q-my-sm" />
+      </div>
     </div>
   </q-page>
 </template>
 
 <script>
 // baraye tarife zarf ha va vasl shodan be backend bayad in gozine ha tarif shavand
-import { ref, onBeforeMount, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { api } from "src/boot/axios";
 
 import { useRouter } from "vue-router";
@@ -196,6 +282,8 @@ export default {
     const Class = ref([]);
     const error = ref();
     const user = ref([]);
+
+    const isLoading = ref(true);
 
     // Tarife dastorat
 
@@ -265,16 +353,21 @@ export default {
 
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
-    onBeforeMount(() => {
+    onMounted(() => {
       // gereftane data haye morede niaz baraye in safhe
       getData();
 
       getUser();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      isLoading,
       user,
       classId,
       dashboard,

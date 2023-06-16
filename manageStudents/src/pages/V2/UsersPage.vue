@@ -75,37 +75,59 @@
 
     <!-- tamami in code ha baraye neshan dadane karkonan mibashad -->
 
-    <q-list v-for="(user, index) in Users" :key="'classInfo-' + index + 1">
+    <div v-if="!isLoading">
+      <q-list v-for="(user, index) in Users" :key="'classInfo-' + index + 1">
+        <q-separator class="q-my-md" />
+
+        <q-item class="col-12 q-my-sm full-width" clickable v-ripple>
+          <q-item-section avatar>
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section
+            >{{ user.identity }}
+            <q-item-label caption>نقش: {{ user.type }}</q-item-label>
+          </q-item-section>
+          <q-item-section
+            @click="RemoveUser(index)"
+            side
+            v-if="user.type != 'معاون'"
+          >
+            <q-item-label>
+              <q-btn color="red-5" unelevated>
+                <q-icon left size="2em" name="delete" />
+                <div>حذف کارکن</div>
+              </q-btn>
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
+
+        <q-separator class="q-my-md" />
+      </q-list>
+    </div>
+
+    <div v-if="isLoading">
       <q-separator class="q-my-md" />
 
-      <q-item class="col-12 q-my-sm full-width" clickable v-ripple>
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section
-          >{{ user.identity }}
-          <q-item-label caption>نقش: {{ user.type }}</q-item-label>
-        </q-item-section>
-        <q-item-section
-          @click="RemoveUser(index)"
-          side
-          v-if="user.type != 'معاون'"
-        >
-          <q-item-label>
-            <q-btn color="red-5" unelevated>
-              <q-icon left size="2em" name="delete" />
-              <div>حذف کارکن</div>
-            </q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-
-      <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
 
       <q-separator class="q-my-md" />
-    </q-list>
+
+      <q-separator class="q-my-md" />
+
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
+
+      <q-separator class="q-my-md" />
+      
+      <q-separator class="q-my-md" />
+
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
+
+      <q-separator class="q-my-md" />
+    </div>
   </q-page>
 </template>
 
@@ -126,6 +148,7 @@ export default {
     const Users = ref([]);
     const addUser = ref(false);
     const error = ref();
+    const isLoading = ref(true);
 
     const username = ref();
     const password = ref();
@@ -220,11 +243,16 @@ export default {
       // Gereftane User as backend
 
       getUser();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      isLoading,
       username,
       password,
       addUser,

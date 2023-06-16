@@ -1,167 +1,179 @@
 <template>
   <q-layout view="hHh lpR lFr">
-    <q-header
-      :class="
-        $q.dark.isActive
-          ? 'bg-dark'
-          : 'bg-primary' + 'flex justify-between content-center align-center'
-      "
-    >
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-btn flat to="/">
-            <q-avatar>
-              <img src="/MainImages/logo.png" />
-            </q-avatar>
-            <span class="q-px-sm text-h5">شهدای منا</span>
-          </q-btn>
-        </q-toolbar-title>
-
-        <q-toggle
-          v-model="darkMode"
-          checked-icon="dark_mode"
-          color="grey-10"
-          unchecked-icon="light_mode"
-          @click="toggleDarkMode"
-        />
-
-        <q-btn
-          class="lt-sm"
-          flat
-          @click="drawer = !drawer"
-          round
-          dense
-          icon="menu"
-        />
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="drawer"
-      show-if-above
-      :mini="!drawer || miniState"
-      @click.capture="drawerClick"
-      :width="250"
-      :breakpoint="500"
-      :class="$q.dark.isActive ? 'bg-dark' : 'bg-grey-3'"
-    >
-      <div class="q-my-md row">
-        <q-avatar class="col-12 q-mini-drawer-hide">
-          <img
-            src="https://cdn.quasar.dev/img/boy-avatar.png"
-            style="width: 85px; height: 85px"
-          />
-        </q-avatar>
-        <div class="col-12 text-center q-mt-md">
-          <!-- <q-badge class="q-mx-sm" rounded color="green" align="middle" /> -->
-          {{ user.identity }}
-        </div>
-      </div>
-
-      <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
-        <q-item to="/" clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="dashboard"
-            />
-          </q-item-section>
-
-          <q-item-section>داشبورد</q-item-section>
-        </q-item>
-
-        <q-item to="/about" clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="help"
-            />
-          </q-item-section>
-
-          <q-item-section>درباره ما</q-item-section>
-        </q-item>
-      </q-list>
-
-      <q-separator inset />
-
-      <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
-        <q-item to="/classes" class="q-my-sm" clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="folder_special"
-            />
-          </q-item-section>
-
-          <q-item-section>کلاس ها</q-item-section>
-        </q-item>
-
-        <q-item
-          to="/students"
-          class="q-my-sm"
-          clickable
-          v-ripple
-          v-if="user.type != 'معلم'"
-        >
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="backpack"
-            />
-          </q-item-section>
-
-          <q-item-section>دانش آموزان</q-item-section>
-        </q-item>
-
-        <q-item
-          to="/users"
-          class="q-my-sm"
-          clickable
-          v-ripple
-          v-if="user.type != 'معلم'"
-        >
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="person"
-            />
-          </q-item-section>
-
-          <q-item-section>کارکنان</q-item-section>
-        </q-item>
-      </q-list>
-
-      <div
-        class="absolute-bottom q-ma-md flex justify-center content-center align-center"
+    <div v-if="!isLoading">
+      <q-header
+        :class="
+          $q.dark.isActive
+            ? 'bg-dark'
+            : 'bg-primary' + 'flex justify-between content-center align-center'
+        "
       >
-        <q-btn
-          round
-          unelevated
-          color="secondary"
-          icon="chevron_left"
-          @click="miniState = true"
-        />
-      </div>
+        <q-toolbar>
+          <q-toolbar-title>
+            <q-btn flat to="/">
+              <q-avatar>
+                <img src="/MainImages/logo.png" />
+              </q-avatar>
+              <span class="q-px-sm text-h5">شهدای منا</span>
+            </q-btn>
+          </q-toolbar-title>
 
-      <q-separator inset />
+          <q-toggle
+            v-model="darkMode"
+            checked-icon="dark_mode"
+            color="grey-10"
+            unchecked-icon="light_mode"
+            @click="toggleDarkMode"
+          />
 
-      <q-list class="q-my-md q-mx-sm" :horizontal-thumb-style="{ opacity: 0 }">
-        <q-item class="q-my-sm bg-red-3" clickable v-ripple @click="logout">
-          <q-item-section avatar>
-            <q-icon
-              :color="$q.dark.isActive ? 'white' : 'grey-9'"
-              name="logout"
+          <q-btn
+            class="lt-sm"
+            flat
+            @click="drawer = !drawer"
+            round
+            dense
+            icon="menu"
+          />
+        </q-toolbar>
+      </q-header>
+
+      <q-drawer
+        v-model="drawer"
+        show-if-above
+        :mini="!drawer || miniState"
+        @click.capture="drawerClick"
+        :width="250"
+        :breakpoint="500"
+        :class="$q.dark.isActive ? 'bg-dark' : 'bg-grey-3'"
+      >
+        <div class="q-my-md row">
+          <q-avatar class="col-12 q-mini-drawer-hide">
+            <img
+              src="https://cdn.quasar.dev/img/boy-avatar.png"
+              style="width: 85px; height: 85px"
             />
-          </q-item-section>
+          </q-avatar>
+          <div class="col-12 text-center q-mt-md">
+            <!-- <q-badge class="q-mx-sm" rounded color="green" align="middle" /> -->
+            {{ user.identity }}
+          </div>
+          <div class="col-12 text-center q-mt-sm">نقش: {{ user.type }}</div>
+        </div>
 
-          <q-item-section>خروج از حساب</q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+        <q-list
+          class="q-my-md q-mx-sm"
+          :horizontal-thumb-style="{ opacity: 0 }"
+        >
+          <q-item to="/dashboard" clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="dashboard"
+              />
+            </q-item-section>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+            <q-item-section>داشبورد</q-item-section>
+          </q-item>
+
+          <q-item to="/about" clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="help"
+              />
+            </q-item-section>
+
+            <q-item-section>درباره ما</q-item-section>
+          </q-item>
+        </q-list>
+
+        <q-separator inset />
+
+        <q-list
+          class="q-my-md q-mx-sm"
+          :horizontal-thumb-style="{ opacity: 0 }"
+        >
+          <q-item to="/classes" class="q-my-sm" clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="folder_special"
+              />
+            </q-item-section>
+
+            <q-item-section>کلاس ها</q-item-section>
+          </q-item>
+
+          <q-item
+            to="/students"
+            class="q-my-sm"
+            clickable
+            v-ripple
+            v-if="user.type != 'معلم'"
+          >
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="backpack"
+              />
+            </q-item-section>
+
+            <q-item-section>دانش آموزان</q-item-section>
+          </q-item>
+
+          <q-item
+            to="/users"
+            class="q-my-sm"
+            clickable
+            v-ripple
+            v-if="user.type != 'معلم'"
+          >
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="person"
+              />
+            </q-item-section>
+
+            <q-item-section>کارکنان</q-item-section>
+          </q-item>
+        </q-list>
+
+        <div
+          class="absolute-bottom q-ma-md flex justify-center content-center align-center"
+        >
+          <q-btn
+            round
+            unelevated
+            color="secondary"
+            icon="chevron_left"
+            @click="miniState = true"
+          />
+        </div>
+
+        <q-separator inset />
+
+        <q-list
+          class="q-my-md q-mx-sm"
+          :horizontal-thumb-style="{ opacity: 0 }"
+        >
+          <q-item class="q-my-sm bg-red-3" clickable v-ripple @click="logout">
+            <q-item-section avatar>
+              <q-icon
+                :color="$q.dark.isActive ? 'white' : 'grey-9'"
+                name="logout"
+              />
+            </q-item-section>
+
+            <q-item-section>خروج از حساب</q-item-section>
+          </q-item>
+        </q-list>
+      </q-drawer>
+
+      <q-page-container>
+        <router-view />
+      </q-page-container>
+    </div>
   </q-layout>
 </template>
 
@@ -180,6 +192,7 @@ export default {
     const dark = ref(localStorage.getItem("dark"));
 
     const user = ref([]);
+    const isLoading = ref(true);
 
     function toggleDarkMode() {
       if ($q.dark.isActive) {
@@ -231,9 +244,11 @@ export default {
     onBeforeMount(() => {
       getUser();
       checkDark();
+          isLoading.value = false;
     });
 
     return {
+      isLoading,
       user,
       logout,
       toggleDarkMode,

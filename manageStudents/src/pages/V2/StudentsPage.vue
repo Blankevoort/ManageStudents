@@ -120,45 +120,71 @@
 
     <!-- listi az danesh amozan va etelaati darmorede anha -->
 
-    <q-list
-      v-for="(student, index) in Students"
-      :key="'classInfo-' + index + 1"
-    >
-      <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
-      <q-separator class="q-my-md" />
-
-      <q-item
-        class="col-12 q-my-sm full-width"
-        clickable
-        v-ripple
-        :to="'/student/' + student.id"
+    <div v-if="!isLoading">
+      <q-list
+        v-for="(student, index) in Students"
+        :key="'classInfo-' + index + 1"
       >
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
-        <q-item-section v-if="student.class_room">
-          {{ student.full_name }}
-          ({{ student.class_room }})
-          <q-item-label caption>شماره تلفن: {{ student.number }}</q-item-label>
-        </q-item-section>
-        <q-item-section v-else>
-          {{ student.full_name }}
-          (کلاسی ندارد)
-          <q-item-label caption>شماره تلفن: {{ student.number }}</q-item-label>
-        </q-item-section>
-        <q-item-section side>
-          <q-item-label>
-            <q-btn flat dense round icon="description" to="student"></q-btn>
-          </q-item-label>
-        </q-item-section>
-      </q-item>
+        <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
+        <q-separator class="q-my-md" />
 
-      <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
+        <q-item
+          class="col-12 q-my-sm full-width"
+          clickable
+          v-ripple
+          :to="'/student/' + student.id"
+        >
+          <q-item-section avatar>
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-section v-if="student.class_room">
+            {{ student.full_name }}
+            ({{ student.class_room }})
+            <q-item-label caption
+              >شماره تلفن: {{ student.number }}</q-item-label
+            >
+          </q-item-section>
+          <q-item-section v-else>
+            {{ student.full_name }}
+            (کلاسی ندارد)
+            <q-item-label caption
+              >شماره تلفن: {{ student.number }}</q-item-label
+            >
+          </q-item-section>
+          <q-item-section side>
+            <q-item-label>
+              <q-btn flat dense round icon="description" to="student"></q-btn>
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <!-- in code baraye joda kardan va khat gozari beine list ha ast -->
+
+        <q-separator class="q-my-md" />
+      </q-list>
+    </div>
+
+    <div v-if="isLoading">
+      <q-separator class="q-my-md" />
+
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
 
       <q-separator class="q-my-md" />
-    </q-list>
+
+      <q-separator class="q-my-md" />
+
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
+
+      <q-separator class="q-my-md" />
+
+      <q-separator class="q-my-md" />
+
+      <q-skeleton height="80px" class="col-12 full-width q-my-sm" />
+
+      <q-separator class="q-my-md" />
+    </div>
   </q-page>
 </template>
 
@@ -179,6 +205,7 @@ export default {
     const Students = ref([]);
     const addStudent = ref(false);
     const error = ref();
+    const isLoading = ref(true);
 
     const first_name = ref();
     const last_name = ref();
@@ -249,11 +276,16 @@ export default {
       // gereftane tamami danesh amoza
 
       getStudents();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
 
     // tarife zarf ha va dastorat
 
     return {
+      isLoading,
       first_name,
       last_name,
       number,

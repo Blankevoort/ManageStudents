@@ -303,6 +303,7 @@ export default {
           Class.value = r.data;
           Students.value = r.data.students;
           Schedule.value = r.data.weekly_schedule;
+          console.log( Schedule.value.monday );
         })
         .catch((err) => {
           if (err.response.status === 404) {

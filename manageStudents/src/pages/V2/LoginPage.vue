@@ -49,8 +49,16 @@
             type="submit"
             color="primary"
             style="width: 350px; height: 55px; font-size: 22px"
-            @click="Login"
+            @click="Login()"
           />
+
+          <q-dialog v-if="!destroy" v-model="wait" seamless position="bottom">
+            <q-card class="bg-positive full-width">
+              <div class="text-h5 text-center q-my-md">
+                لطفا تا پایان عملیات منتظر بمانید.
+              </div>
+            </q-card>
+          </q-dialog>
         </div>
         <div class="text-red-5 text-center q-mt-md">
           {{ error }}
@@ -223,11 +231,15 @@ export default {
 
     const error = ref();
 
+    const wait = ref(false);
+    const destroy = ref(false);
+
     // Tarife dastorat
 
     // dastore vorod be panel
 
     function Login() {
+      wait.value = true;
       api
         .post("auth/token/login/", {
           identity: identity.value,
@@ -236,11 +248,12 @@ export default {
         .then((r) => {
           if (r.data.auth_token) {
             $q.cookies.set("token", r.data.auth_token);
-            $router.push("/");
+            $router.push("/dashboard");
           }
         })
         .catch((err) => {
           if (err.response) {
+            destroy.value = true;
             if (err.response.status === 400) {
               error.value = "با اطلاعات وارد شده نمیتوان وارد شد.";
             } else if (err.response.status === 401) {
@@ -264,6 +277,8 @@ export default {
       identity,
       password,
       error,
+      wait,
+      destroy,
       isPwd: ref(true),
       Login,
     };
