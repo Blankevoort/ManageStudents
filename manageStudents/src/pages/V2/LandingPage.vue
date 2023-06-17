@@ -3,7 +3,7 @@
     <div>
       <div
         class="fit row justify-around items-center content-center"
-        style="margin-top: 200px; margin-bottom: 200px"
+        style="margin-top: 200px"
       >
         <!-- tozihe ghabliat haye in application va khobi haye an -->
 
@@ -16,7 +16,7 @@
               class="q-mr-xl q-px-sm q-mt-md border q-ml-lg"
               style="width: 225px"
             >
-              <div style="color: #777676; font-size: 18px;">
+              <div style="color: #777676; font-size: 18px">
                 هدف این برنامه آسان تر نمودن دسترسی مدیر و معاون مدرسه به تمامی
                 کلاس ها و دانش آموزان و برنامه کلاس آنهاست.دسترسی به این برنامه
                 اکنون تنها برای مدیران و معاونان و معلمان موجود است.

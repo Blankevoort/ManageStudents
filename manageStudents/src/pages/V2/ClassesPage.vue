@@ -74,7 +74,13 @@
             <q-item-section>کلاس {{ classInfo.class_id }}</q-item-section>
             <q-item-section side>
               <q-item-label>
-                <q-btn flat dense round icon="description" to="edit"></q-btn>
+                <q-btn
+                  flat
+                  dense
+                  round
+                  icon="description"
+                  :to="'/class/' + classInfo.class_id"
+                />
               </q-item-label>
             </q-item-section>
           </q-item>
