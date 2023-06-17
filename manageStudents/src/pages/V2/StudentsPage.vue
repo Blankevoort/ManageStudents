@@ -155,7 +155,13 @@
           </q-item-section>
           <q-item-section side>
             <q-item-label>
-              <q-btn flat dense round icon="description" to="student"></q-btn>
+              <q-btn
+                flat
+                dense
+                round
+                icon="description"
+                :to="'/student/' + student.id"
+              />
             </q-item-label>
           </q-item-section>
         </q-item>

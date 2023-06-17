@@ -13,8 +13,11 @@
           </q-btn>
         </q-toolbar-title>
 
-        <q-btn v-if="!userloggedIn" flat label="ورود" to="/login" />
-        <q-btn v-else flat label="داشبورد" to="/dashboard" />
+        <div v-if="!isLoading">
+          <q-btn v-if="!userloggedIn" flat label="ورود" to="/login" />
+          <q-btn v-else flat label="داشبورد" to="/dashboard" />
+        </div>
+
         <q-toggle
           v-model="darkMode"
           checked-icon="dark_mode"
@@ -32,7 +35,7 @@
 </template>
 
 <script>
-import { ref, onBeforeMount } from "vue";
+import { ref, onMounted } from "vue";
 import { api } from "src/boot/axios";
 
 import { useQuasar, Cookies, Dark } from "quasar";
@@ -48,6 +51,7 @@ export default {
 
     const user = ref([]);
     const userloggedIn = ref(false);
+    const isLoading = ref(true);
 
     // function ha
 
@@ -86,12 +90,20 @@ export default {
         });
     }
 
-    onBeforeMount(() => {
+    // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
+
+    onMounted(() => {
       getUser();
+
       checkDark();
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 2000);
     });
 
     return {
+      isLoading,
       user,
       userloggedIn,
       toggleDarkMode,
