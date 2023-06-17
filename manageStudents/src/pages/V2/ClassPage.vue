@@ -31,7 +31,7 @@
     </div>
 
     <div class="q-my-xl">
-      <q-card flat bordered>
+      <q-card flat bordered v-if="showSchedule">
         <q-markup-table>
           <thead>
             <tr>
@@ -227,6 +227,7 @@ export default {
     const error = ref();
     const user = ref([]);
     const Schedule = ref();
+    const showSchedule = ref(false);
 
     const first_name = ref();
     const last_name = ref();
@@ -292,8 +293,8 @@ export default {
 
     // gereftane class baraye neshan dadane etelaate dakhele on
 
-    function getClass() {
-      api
+    async function getClass() {
+      await api
         .get("classes/" + $route.params.id, {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
@@ -303,7 +304,7 @@ export default {
           Class.value = r.data;
           Students.value = r.data.students;
           Schedule.value = r.data.weekly_schedule;
-          console.log( Schedule.value.monday );
+          showSchedule.value = true;
         })
         .catch((err) => {
           if (err.response.status === 404) {
@@ -314,8 +315,8 @@ export default {
 
     // Gereftane User as backend
 
-    function getUser() {
-      api
+    async function getUser() {
+      await api
         .get("auth/users/me/", {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
@@ -328,17 +329,18 @@ export default {
 
     // in dastor ghabl az bala amadane webapp in dastorat ro ejra mikone
 
-    onBeforeMount(() => {
+    onBeforeMount(async () => {
       // gereftane class baraye neshan dadane etelaate dakhele on
-      getClass();
-
-      getUser();
+      await getClass();
+      console.log(showSchedule.value);
+      await getUser();
     });
 
     // tarife zarf ha va dastorat
 
     return {
       Schedule,
+      showSchedule,
       user,
       Class,
       first_name,
