@@ -12,7 +12,7 @@
           <q-toolbar-title>
             <q-btn flat to="/">
               <q-avatar>
-                <img src="/MainImages/logo.png" />
+                <img src="../assets/Logo.png" />
               </q-avatar>
               <span class="q-px-sm text-h5">شهدای منا</span>
             </q-btn>

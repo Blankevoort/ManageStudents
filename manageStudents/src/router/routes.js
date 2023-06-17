@@ -3,7 +3,7 @@ const routes = [
     path: "/login",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/LoginPage.vue") },
+      { path: "", component: () => import("src/pages/LoginPage.vue") },
     ],
     meta: {
       login: true,
@@ -13,7 +13,7 @@ const routes = [
     path: "/dashboard",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/DashboardPage.vue") },
+      { path: "", component: () => import("src/pages/DashboardPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -26,7 +26,7 @@ const routes = [
     path: "/classes",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/ClassesPage.vue") },
+      { path: "", component: () => import("src/pages/ClassesPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -39,7 +39,7 @@ const routes = [
     path: "/students",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/StudentsPage.vue") },
+      { path: "", component: () => import("src/pages/StudentsPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -51,7 +51,7 @@ const routes = [
     path: "/class/:id",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/ClassPage.vue") },
+      { path: "", component: () => import("src/pages/ClassPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -64,7 +64,7 @@ const routes = [
     path: "/student/:id",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/StudentPage.vue") },
+      { path: "", component: () => import("src/pages/StudentPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -76,7 +76,7 @@ const routes = [
     path: "/users",
     component: () => import("layouts/ManagmentPanel.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/UsersPage.vue") },
+      { path: "", component: () => import("src/pages/UsersPage.vue") },
     ],
     meta: {
       requireAuth: true,
@@ -88,14 +88,14 @@ const routes = [
     path: "/about",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/AboutPage.vue") },
+      { path: "", component: () => import("src/pages/AboutPage.vue") },
     ],
   },
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("src/pages/V2/LandingPage.vue") },
+      { path: "", component: () => import("src/pages/LandingPage.vue") },
     ],
   },
 

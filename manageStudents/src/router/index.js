@@ -20,7 +20,7 @@ export default route(function () {
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
-    history: createWebHistory(),
+    history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
   Router.beforeEach((to, from, next) => {
