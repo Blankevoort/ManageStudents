@@ -47,13 +47,19 @@
           <q-icon name="android" size="325px" />
 
           <q-card-section>
-            <div class="text-h5 q-mt-sm q-mb-xs">اندروید</div>
+            <div class="text-h5 q-mt-sm q-mb-xs">اندروید (به زوردی)</div>
             <div class="text-grey">
               ورژن اندروید این برنامه برای راحتی کار کارمندان ساخته شده که
               بتوانند بدون نیاز به استفاده از کامپیوتر و یا سایت به راحتی از این
               برنامه استفاده کنند.
             </div>
-            <q-btn class="q-ma-sm" flat color="primary" label="دانلود" />
+            <q-btn
+              disable
+              class="q-ma-sm"
+              flat
+              color="primary"
+              label="دانلود"
+            />
           </q-card-section>
         </q-card>
 
@@ -65,13 +71,19 @@
           <q-icon name="monitor" size="325px" />
 
           <q-card-section>
-            <div class="text-h5 q-mt-sm q-mb-xs">کامپیوتر</div>
+            <div class="text-h5 q-mt-sm q-mb-xs">کامپیوتر (به زوردی)</div>
             <div class="text-grey">
               ورژن کامپیوتر این برنامه برای دیدن بهتر و راحتی کار با این برنامه
               ساخته شده که خود تیم سازنده به شما ورژن کامپیوتر را پیشنهاد می
               دهد.
             </div>
-            <q-btn class="q-ma-sm" flat color="primary" label="دانلود" />
+            <q-btn
+              disable
+              class="q-ma-sm"
+              flat
+              color="primary"
+              label="دانلود"
+            />
           </q-card-section>
         </q-card>
       </div>
