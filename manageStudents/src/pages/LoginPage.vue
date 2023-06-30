@@ -51,17 +51,6 @@
             style="width: 350px; height: 55px; font-size: 22px"
             @click="Login()"
           />
-
-          <q-dialog v-if="!destroy" v-model="wait" seamless position="bottom">
-            <q-card class="bg-positive full-width">
-              <div class="text-h5 text-center q-my-md">
-                لطفا تا پایان عملیات منتظر بمانید.
-              </div>
-            </q-card>
-          </q-dialog>
-        </div>
-        <div class="text-red-5 text-center q-mt-md">
-          {{ error }}
         </div>
       </q-form>
     </div>
@@ -225,13 +214,13 @@ export default {
     // tarife zard haye morede niaz
     const $q = useQuasar();
     const $router = useRouter();
+    const nerror = ref(true);
 
     const identity = ref();
     const password = ref();
 
     const error = ref();
 
-    const wait = ref(false);
     const destroy = ref(false);
 
     // Tarife dastorat
@@ -239,7 +228,6 @@ export default {
     // dastore vorod be panel
 
     function Login() {
-      wait.value = true;
       api
         .post("auth/token/login/", {
           identity: identity.value,
@@ -256,28 +244,43 @@ export default {
             destroy.value = true;
             if (err.response.status === 400) {
               error.value = "با اطلاعات وارد شده نمیتوان وارد شد.";
+              triggerError();
             } else if (err.response.status === 401) {
               error.value = "اطلاعات وارد شده معتبر نیستند.";
+              triggerError();
             } else if (err.response.status === 403) {
               error.value = "دسترسی غیرمجاز.";
+              triggerError();
             } else {
               error.value = "خطای سمت سرور: درخواست نامعتبر.";
+              triggerError();
             }
           } else if (err.request) {
             error.value = "خطای سمت سرور: درخواست ارسال نشد.";
+            triggerError();
           } else {
             error.value = "خطای سمت سرور: خطای نامشخص رخ داد.";
+            triggerError();
           }
         });
+    }
+
+    function triggerError() {
+      $q.notify({
+        position: "top-left",
+        type: "negative",
+        message: error.value,
+        badgeStyle: "opacity: 0",
+      });
     }
 
     // tarife zarf ha va dastorat
 
     return {
+      nerror,
       identity,
       password,
       error,
-      wait,
       destroy,
       isPwd: ref(true),
       Login,
