@@ -29,8 +29,14 @@
           class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center q-my-xl"
         >
           <img
+            class="gt-xs"
             src="../assets/LandingPageImage.jpg"
-            style="border-radius: 50%; width: 320px; height: 320px"
+            style="border-radius: 50%; width: 50%; height: auto"
+          />
+          <img
+            class="lt-sm"
+            src="../assets/LandingPageImage.jpg"
+            style="border-radius: 50%; width: 80%; height: auto"
           />
         </div>
       </div>
