@@ -1,7 +1,8 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh lpR fFf" class="text">
     <q-header
-      class="bg-primary flex justify-between content-center align-center"
+      class="flex justify-between content-center align-center"
+      style="background-color: #f19181"
     >
       <q-toolbar>
         <q-toolbar-title>
@@ -17,14 +18,6 @@
           <q-btn v-if="!userloggedIn" flat label="ورود" to="/login" />
           <q-btn v-else flat label="داشبورد" to="/dashboard" />
         </div>
-
-        <q-toggle
-          v-model="darkMode"
-          checked-icon="dark_mode"
-          color="grey-9"
-          unchecked-icon="light_mode"
-          @click="toggleDarkMode"
-        />
       </q-toolbar>
     </q-header>
 
@@ -46,36 +39,10 @@ export default {
     const miniState = ref(false);
 
     const $q = useQuasar();
-    const darkMode = ref(false);
-    const dark = ref(localStorage.getItem("dark"));
 
     const user = ref([]);
     const userloggedIn = ref(false);
     const isLoading = ref(true);
-
-    // function ha
-
-    function toggleDarkMode() {
-      if ($q.dark.isActive) {
-        $q.dark.set(false);
-        localStorage.removeItem("dark");
-      } else {
-        $q.dark.set(true);
-        localStorage.setItem("dark", $q.dark.mode);
-      }
-    }
-
-    // Function baraye check kardane localstorage
-
-    function checkDark() {
-      if (dark.value) {
-        $q.dark.set(true);
-        darkMode.value = true;
-      } else {
-        $q.dark.set(false);
-        darkMode.value = false;
-      }
-    }
 
     function getUser() {
       api
@@ -95,8 +62,6 @@ export default {
     onMounted(() => {
       getUser();
 
-      checkDark();
-
       setTimeout(() => {
         isLoading.value = false;
       }, 2000);
@@ -106,10 +71,6 @@ export default {
       isLoading,
       user,
       userloggedIn,
-      toggleDarkMode,
-      darkMode,
-      dark,
-      checkDark,
 
       drawer: ref(false),
       miniState,
@@ -131,6 +92,20 @@ export default {
 .footer-img {
   height: 166px !important;
 }
+.fixed,
+.fixed-full,
+.fullscreen,
+.fixed-center,
+.fixed-bottom,
+.fixed-left,
+.fixed-right,
+.fixed-top,
+.fixed-top-left,
+.fixed-top-right,
+.fixed-bottom-left,
+.fixed-bottom-right {
+  position: absolute;
+}
 
 .footer-margin {
   margin-left: 20px;
@@ -140,5 +115,9 @@ export default {
 
 #q-app > div > footer {
   position: absolute;
+}
+
+.text {
+  color: #eceaea;
 }
 </style>
