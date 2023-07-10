@@ -130,7 +130,7 @@
       class="fit row wrap justify-center items-center content-center q-pt-md"
       style="background-color: #75b7f4; margin-top: 205px; height: 700px"
     >
-      <div class="text-center text-h3 col-12">درباره</div>
+      <div class="text-center text-h3 col-12">سازنده ها</div>
 
       <div class="q-pa-xl col-12">
         <div class="fit row wrap justify-between items-center content-center">
@@ -138,15 +138,22 @@
             class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 q-mt-md"
           >
             <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
-              <div class="text-h5 absolute-bottom">Title</div>
+              <div class="text-h5 absolute-bottom">
+                معین صداقتی
+                <div class="text-caption">فرانت اند کار</div>
+              </div>
             </q-img>
           </q-card>
 
           <q-card
+            style="width: 350px; height: 350px"
             class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 q-mt-md"
           >
-            <q-img src="https://cdn.quasar.dev/img/parallax2.jpg">
-              <div class="text-h5 absolute-bottom">Title</div>
+            <q-img src="../assets/AboutImages/abdolrahman.png">
+              <div class="text-h5 absolute-bottom">
+                عبدالرحمان کیانی
+                <div class="text-caption">بک اند کار</div>
+              </div>
             </q-img>
           </q-card>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <!-- tamami design haye in safhe dar vasate an gharar migirand -->
-  <q-page class="fit row justify-around items-center content-center">
+  <q-page class="fit row justify-around items-center content-center" style="color: black;">
     <div
       class="q-my-md col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 flex justify-center content-center align-center"
     >
