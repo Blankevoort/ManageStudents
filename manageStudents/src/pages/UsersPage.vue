@@ -159,13 +159,14 @@ export default {
 
     function RemoveUser(index) {
       api
-        .delete("auth/users/" + Users.value[index].username + "/", {
+        .delete("auth/users/" + Users.value[index].identity + "/", {
           headers: {
             Authorization: "Token " + $q.cookies.get("token"),
           },
         })
         .then((r) => {
-          location.reload();
+          getUsers();
+          getUser();
         });
     }
 

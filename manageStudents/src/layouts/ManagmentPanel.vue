@@ -74,17 +74,6 @@
 
             <q-item-section>داشبورد</q-item-section>
           </q-item>
-
-          <q-item to="/about" clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon
-                :color="$q.dark.isActive ? 'white' : 'grey-9'"
-                name="help"
-              />
-            </q-item-section>
-
-            <q-item-section>درباره ما</q-item-section>
-          </q-item>
         </q-list>
 
         <q-separator inset />
