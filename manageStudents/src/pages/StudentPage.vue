@@ -122,7 +122,7 @@
           <q-select
             class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
             v-model="discipline"
-            label="Select Color"
+            label="انتخاب رنگ"
             :options="colorOptions"
             filled
             emit-value
@@ -188,10 +188,10 @@ export default {
     const classRoom = ref();
     const discipline = ref();
     const colorOptions = [
-      { label: "White", value: "white" },
-      { label: "Green", value: "green" },
-      { label: "Yellow", value: "yellow" },
-      { label: "Red", value: "red" },
+      { label: "سفید", value: "white" },
+      { label: "سبز", value: "green" },
+      { label: "زرد", value: "yellow" },
+      { label: "قرمز", value: "red" },
     ];
 
     // Tarife dastorat

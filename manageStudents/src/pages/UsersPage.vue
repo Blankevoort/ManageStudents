@@ -20,7 +20,7 @@
 
     <q-dialog v-model="addUser">
       <div class="row">
-        <q-card square class="shadow-24" style="width: 300px; height: 435px">
+        <q-card square class="shadow-24" style="width: 300px; height: 495px">
           <q-card-section class="bg-primary">
             <h4 class="text-h5 text-white q-my-md">افزودن کارکن</h4>
             <div
@@ -54,6 +54,15 @@
                   <q-icon name="enhanced_encryption" />
                 </template>
               </q-input>
+
+              <q-select
+                class="col-xs-12 col-sm-12 col-md-6 col-6 q-pa-md"
+                v-model="discipline"
+                label="انتخاب نقش"
+                :options="userRole"
+                filled
+                emit-value
+              ></q-select>
             </q-form>
           </q-card-section>
           <q-card-actions class="q-px-lg flex justify-center">
@@ -65,9 +74,6 @@
               label="افزودن"
               @click="AddNewUser()"
             />
-            <div class="text-red-5 text-center q-mt-md">
-              {{ error }}
-            </div>
           </q-card-actions>
         </q-card>
       </div>
@@ -92,7 +98,7 @@
           <q-item-section
             @click="RemoveUser(index)"
             side
-            v-if="user.type != 'معاون'"
+            v-if="(user.type = 'مدیر')"
           >
             <q-item-label>
               <q-btn color="red-5" unelevated>
@@ -149,6 +155,12 @@ export default {
     const addUser = ref(false);
     const error = ref();
     const isLoading = ref(true);
+    const discipline = ref();
+    const userRole = [
+      { label: "مدیر", value: "H" },
+      { label: "معاون", value: "S" },
+      { label: "معلم", value: "T" },
+    ];
 
     const username = ref();
     const password = ref();
@@ -174,8 +186,9 @@ export default {
 
     function AddNewUser() {
       var data = {
-        username: username.value,
+        identity: username.value,
         password: password.value,
+        type: discipline.value,
       };
       api
         .post("auth/users/", data, {
@@ -186,6 +199,7 @@ export default {
         .then((r) => {
           getUsers();
           getUser();
+          addUser.value = false;
         })
         .catch((err) => {
           if (err.response) {
@@ -267,6 +281,8 @@ export default {
     // tarife zarf ha va dastorat
 
     return {
+      userRole,
+      discipline,
       isLoading,
       username,
       password,
