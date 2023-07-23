@@ -8,9 +8,9 @@
         class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 flex justify-center content-center align-center q-my-xl"
       >
         <div style="width: 320px">
-          <div class="text-h2 q-pl-md">برنامه مدیریت مدرسه</div>
+          <div class="text-h3 q-pl-md">برنامه مدیریت مدرسه</div>
           <div class="q-mt-md q-ml-lg" style="width: 280px !important">
-            <div style="font-size: 30px">
+            <div style="font-size: 26px">
               برنامه ای برای دسترسی آسان کارکنان مدرسه شما
             </div>
           </div>
@@ -43,11 +43,11 @@
             class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 flex justify-center content-center align-center q-my-xl"
           >
             <div style="width: 320px">
-              <div class="text-h3 q-pl-md" style="width: 320px">
+              <div class="text-h4 q-pl-md" style="width: 320px">
                 برنامه مدیریت مدرسه چیه؟
               </div>
               <div class="q-mr-xl q-mt-xl" style="width: 320px">
-                <div style="font-size: 26px; width: 285px">
+                <div style="font-size: 22px; width: 285px">
                   برنامه مدیریت مدرسه ساخته شده توسط معین صداقتی و عبدالرحمان
                   کیانی برای مسابقات خوارزمی است. موضوع این برنامه مانند اسم
                   برنامه سادست. مدیر معاون یا معلم مدرسه وارد سایت میشه و میتونه
@@ -65,11 +65,11 @@
             class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 flex justify-center content-center align-center q-my-xl"
           >
             <div style="width: 320px">
-              <div class="text-h3 q-pl-md" style="width: 320px">
+              <div class="text-h4 q-pl-md" style="width: 320px">
                 قابلیت های برنامه چیه؟
               </div>
               <div class="q-mr-xl q-mt-xl" style="width: 320px">
-                <div style="font-size: 26px; width: 320px">
+                <div style="font-size: 22px; width: 320px">
                   از جمله قابلیت هایی که این برنامه داره:
                   <br />
                   دیدنده کل داش آموزان و کارکنان و کلاس های موجود توی مدرسه.
@@ -108,11 +108,11 @@
             class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 flex justify-center content-center align-center q-my-xl"
           >
             <div style="width: 320px">
-              <div class="text-h3 q-pl-md" style="width: 320px">
+              <div class="text-h4 q-pl-md" style="width: 320px">
                 به درد من میخوره یا نه؟
               </div>
               <div class="q-mr-xl q-mt-xl" style="width: 320px">
-                <div style="font-size: 26px; width: 320px">
+                <div style="font-size: 22px; width: 320px">
                   اگه مدیر مدرسه اید و دنبال یه جای راحت برای کنترل کارکنان و
                   دانش آموزان مدرستون هستید این برنامه بهترین برنامه برای
                   شماست.شما میتونید به راحتی این برنامه رو توی کامپیوتر یا
